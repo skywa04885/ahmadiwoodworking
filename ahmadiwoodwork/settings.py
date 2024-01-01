@@ -12,25 +12,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os.path
 from pathlib import Path
 
-from django.conf.global_settings import EMAIL_HOST
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+try:
+    from .settings_local import *
+except ImportError:
+    pass
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m27779$j*^o-p&616)5+8z-_$mi86wt43lq&#k39@*$9_@iz4_'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = [
-    "95.99.126.180",
-    "localhost",
-    "127.0.0.1"
-]
 
 # Application definition
 
@@ -84,26 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ahmadiwoodwork.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-if not DEBUG:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "OPTIONS": {
-                "service": "my_service"
-            },
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'app.db',
-        }
-    }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -136,21 +104,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = 'tailwind'
-
-CKEDITOR_UPLOAD_PATH = "uploads/"
 
 STATICFILES_FINDERS = (  ##django compressor
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -158,22 +118,3 @@ STATICFILES_FINDERS = (  ##django compressor
     # other finders..
     'compressor.finders.CompressorFinder',
 )
-
-if not DEBUG:
-    COMPRESS_ENABLED = True
-    COMPRESS_ROOT = STATIC_ROOT  ##django compressor
-    COMPRESS_OFFLINE = True
-
-    if not COMPRESS_ENABLED:  ##django compressor
-        COMPRESS_ENABLED = True
-        COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
-        COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"]  ##django compressor
-
-
-CONTACT_NOTIFICATION_FROM_ADDRESS = 'luke.rieff@gmail.com'
-CONTACT_NOTIFICATION_TO_ADDRESSES = ['luke.rieff@gmail.com']
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'luke.rieff@gmail.com'
-EMAIL_HOST_PASSWORD = 'Ffeirluke234'
