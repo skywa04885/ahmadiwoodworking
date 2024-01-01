@@ -15,8 +15,5 @@ COPY "./" "./"
 # Install all the dependencies.
 RUN ["pip", "install", "--no-cache-dir", "-r", "requirements.txt"]
 
-# Collects the static files.
-RUN ["python", "manage.py", "collectstatic", "--noinput"]
-
 # Runs the entrypoint.
 CMD ["bash", "entrypoint.sh"]
