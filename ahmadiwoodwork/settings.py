@@ -31,8 +31,6 @@ INSTALLED_APPS = [
     'cssmin',
     'jsmin',
     'ckeditor_uploader',
-    'crispy_forms',
-    'crispy_tailwind',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
