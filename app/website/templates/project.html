@@ -31,7 +31,7 @@
 {#                </ul>#}
 {#            </div>#}
 {#            <div x-data="{ pictures: [], currentPictureIndex: 0 }"#}
-{#                 x-init="pictures = JSON.parse(document.getElementById('pictures-data').textContent)"#}
+{#                 x-entrypoint="pictures = JSON.parse(document.getElementById('pictures-data').textContent)"#}
 {#                 class="flex-grow flex flex-col lg:flex-row gap-4 items-stretc h-96">#}
 {#                <div :style="{ backgroundImage: `url('${pictures[currentPictureIndex]}')` }" x-ref="preview"#}
 {#                     class="grow bg-black bg-cover bg-center bg-no-repeat rounded-xl">#}

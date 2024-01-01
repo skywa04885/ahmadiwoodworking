@@ -1,19 +1,27 @@
 FROM python:3.11.6-alpine
 
-# Sets the environment variables.
 ENV DJANGO_DEVELOPMENT=true
 
-# Installs the build dependencies, linux headers is needed for uwsgi.
-RUN ["apk", "add", "build-base", "linux-headers", "bash"]
+RUN ["apk", "add", "build-base", "linux-headers", "bash", "nginx"]
 
-# Set the working directory.
+COPY "./entrypoint" "/bin/entrypoint"
+
+WORKDIR "/etc/nginx"
+
+COPY "./nginx" "./"
+
+#
 WORKDIR "/usr/src/app"
 
-# Copy the files.
-COPY "./" "./"
+# Copy the app.
+COPY "./app" "./"
 
-# Install all the dependencies.
+# Install all the requirements.
 RUN ["pip", "install", "--no-cache-dir", "-r", "requirements.txt"]
 
-# Runs the entrypoint.
-CMD ["bash", "entrypoint.sh"]
+# Collect all the static files and compress them.
+RUN ["python", "manage.py", "collectstatic", "--noinput"]
+RUN ["python", "manage.py", "compress"]
+
+# Run the entrypoint script.
+CMD ["bash", "/bin/entrypoint"]

@@ -12,6 +12,39 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os.path
 from pathlib import Path
 
+SECRET_KEY = 'django-insecure-m27779$j*^o-p&616)5+8z-_$mi86wt43lq&#k39@*$9_@iz4_'
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'app.db',
+    }
+}
+
+ALLOWED_HOSTS = []
+
+DEBUG = True
+
+CONTACT_NOTIFICATION_FROM_ADDRESS = 'luke.rieff@gmail.com'
+CONTACT_NOTIFICATION_TO_ADDRESSES = ['luke.rieff@gmail.com']
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# Enables compression.
+COMPRESS_ENABLED = True
+COMPRESS_ROOT = STATIC_ROOT
+COMPRESS_OFFLINE = True
+COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
+COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"]
+
 try:
     from .settings_local import *
 except ImportError:
