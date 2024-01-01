@@ -1,0 +1,38 @@
+<div class="flex flex-col items-center">
+    <div class="container grid lg:grid-cols-4">
+        {% for post in posts %}
+            <div class="p-4 rounded-2xl shadow-[0_4px_30px_0px_rgba(0,0,0,0.2)] gap-4 flex flex-col items-stretch">
+                <img class="rounded-xl" alt="Thumbnail for post {{ post.title|escape }}"
+                     src="{{ post.thumbnail.url|escape }}"/>
+                <p class="font-semibold text-black text-right">
+                    {{ post.title|escape }}
+                </p>
+                <div class="flex flex-col items-stretch gap-2">
+                    <div class="flex flex-row items-center justify-end gap-1">
+                        {% for tag in post.tags.all %}
+                            {% if not forloop.first %}
+                                <p class="text-slate-600 font-semibold text-xs">
+                                -
+                                </p>
+                            {% endif %}
+                                <p class="text-slate-400 text-xs font-semibold">
+                                    {{ tag }}
+                                </p>
+                        {% endfor %}
+                    </div>
+                    <p class="text-sm text-slate-800 text-right">
+                        {{ post.content|safe|striptags|truncatechars:100 }}
+                    </p>
+                </div>
+                <div class="flex flex-col items-start">
+                    <button class="rounded-full p-1 bg-black fill-white w-8 h-8 flex items-stretch justify-stretch">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

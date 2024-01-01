@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+    Contact
+{% endblock %}
+{% block content %}
+    {% include 'about/header.html' %}
+    <div class="flex flex-col items-center px-2">
+        <div class="container">
+            <p class="text-black leading-relaxed text-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Culpa
+                eligendi eveniet fuga minus nihil totam
+                voluptas voluptatum! A adipisci alias corporis, dolor doloribus est excepturi fugit illo ipsam itaque
+                modi neque porro quaerat, ratione repudiandae sed sint suscipit? Autem, dolores! Lorem ipsum dolor sit
+                amet, consectetur adipisicing elit. Accusamus eaque exercitationem laudantium modi, perferendis quas.
+                Atque harum odio quaerat quidem.</p>
+        </div>
+    </div>
+    <div class="flex flex-col items-center px-2">
+        <div class="container h-72 rounded-xl bg-no-repeat bg-cover bg-center"
+             style="background-image: url('{% static 'website/index/head.png' %}')"></div>
+    </div>
+    <div class="flex flex-col items-center bg-gray-50 px-2">
+        <div class="container grid xl:grid-cols-4 md:grid-cols-2">
+            <div class="p-4 text-center">
+                <p class="text-lg text-black font-bold">5</p>
+                <p class="text-xl text-black uppercase">Employees</p>
+            </div>
+            <div class="p-4 text-center">
+                <p class="text-lg text-black font-bold">500</p>
+                <p class="text-xl text-black uppercase">Projects</p>
+            </div>
+            <div class="p-4 text-center">
+                <p class="text-lg text-black font-bold">100</p>
+                <p class="text-xl text-black uppercase">Satisfied Customers</p>
+            </div>
+            <div class="p-4 text-center">
+                <p class="text-lg text-black font-bold">3</p>
+                <p class="text-xl text-black uppercase">Products</p>
+            </div>
+        </div>
+    </div>
+    <div class="my-16"></div>
+{% endblock %}

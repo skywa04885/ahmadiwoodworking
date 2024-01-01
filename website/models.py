@@ -1,0 +1,91 @@
+from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
+from django_resized import ResizedImageField
+from taggit.managers import TaggableManager
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
+    message = models.TextField()
+    notified = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
+class Product(models.Model):
+    thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='products/thumbnails/',
+                                  force_format='JPEG', quality=75)
+    banner = ResizedImageField(size=[1280, 720], crop=['middle', 'center'], upload_to='products/banners/',
+                               force_format='JPEG', quality=75)
+    name = models.CharField(max_length=100)
+    description = RichTextUploadingField()
+    tags = TaggableManager()
+
+    def __str__(self):
+        return self.name
+
+
+class ProductAdvantage(models.Model):
+    advantage = models.CharField(max_length=100)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.advantage
+
+
+class ProductDisadvantage(models.Model):
+    disadvantage = models.CharField(max_length=100)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.disadvantage
+
+
+class Project(models.Model):
+    thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='posts/thumbnails/',
+                                  force_format='JPEG', quality=75)
+    name = models.CharField(max_length=100)
+    construction_date = models.DateField()
+    products = models.ManyToManyField('Product', related_name='projects')
+    colors = models.ManyToManyField('Color', related_name='colors')
+
+    def __str__(self):
+        return self.name
+
+
+class ProjectPicture(models.Model):
+    picture = ResizedImageField(size=[750, 500], crop=['middle', 'center'], upload_to='posts/banners/',
+                                force_format='JPEG', quality=75)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='pictures')
+
+
+class Color(models.Model):
+    name = models.CharField(max_length=100)
+    hex = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Post(models.Model):
+    thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='posts/thumbnails/',
+                                  force_format='JPEG', quality=75)
+    banner = ResizedImageField(size=[1280, 720], crop=['middle', 'center'], upload_to='posts/banners/',
+                               force_format='JPEG', quality=75)
+    title = models.CharField(max_length=100)
+    content = RichTextUploadingField()
+    date = models.DateField()
+    tags = TaggableManager()
+
+    def __str__(self):
+        return self.title
+
+
+class QAndA(models.Model):
+    question = models.CharField(max_length=100)
+    answer = RichTextUploadingField()
+
+    def __str__(self):
+        return self.question

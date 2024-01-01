@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+    Contact
+{% endblock %}
+{% block content %}
+    {% include 'contact/header.html' %}
+    <div class="flex flex-col items-center">
+        <div class="container grid md:grid-cols-2 gap-4">
+            {% include 'contact/form.html' with form=form %}
+            {% include 'contact/info.html' %}
+        </div>
+    </div>
+    {% include 'contact/map.html' %}
+{% endblock %}

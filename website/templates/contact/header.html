@@ -1,0 +1,11 @@
+{% extends 'components/header.html' %}
+{% load static %}
+{% block header %}
+    {% static 'website/index/head.png' as background %}
+    {% with title='Hello World' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock header %}
+{% block content %}
+    {% include 'contact/header/breadcrumb.html' %}
+{% endblock %}

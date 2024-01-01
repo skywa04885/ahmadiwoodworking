@@ -1,0 +1,13 @@
+{% load static %}
+{% static 'website/index/delivery_and_installation.png' as delivery_and_installation %}
+{% static 'website/index/design_and_production.png' as design_and_production %}
+{% static 'website/index/repair.png' as repair %}
+<div class="flex items-center justify-center">
+    <div class="container space-y-16">
+        <div class="grid lg:grid-cols-3 gap-16">
+            {% include 'index/services/service.html' with icon_src=delivery_and_installation title='Delivery & Installation' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur assumenda beatae, dignissimos doloremque ea eaque enim error itaque, iure labore modi obcaecati praesentium quae repellat reprehenderit rerum sunt vitae voluptate?' %}
+            {% include 'index/services/service.html' with icon_src=design_and_production title='Design & Production' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur assumenda beatae, dignissimos doloremque ea eaque enim error itaque, iure labore modi obcaecati praesentium quae repellat reprehenderit rerum sunt vitae voluptate?' %}
+            {% include 'index/services/service.html' with icon_src=repair title='Repairing' content='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur assumenda beatae, dignissimos doloremque ea eaque enim error itaque, iure labore modi obcaecati praesentium quae repellat reprehenderit rerum sunt vitae voluptate?' %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div x-data="{ hovering: false }" @mouseenter="hovering = true" @mouseleave="hovering = false">
+    <!-- Tailwind classes: -translate-y-4 -->
+    <div class="flex flex-col gap-8 items-center transition-transform duration-700"
+         :class="{ '-translate-y-4': hovering }">
+        <!-- Tailwind classes: drop-shadow-xl -->
+        <div class="rounded-xl border-[1rem] border-white transition-all duration-200 self-stretch"
+             :class="{ 'drop-shadow-xl': hovering }">
+            <div class="relative h-80 rounded-md overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 bottom-0 bg-no-repeat bg-cover bg-center"
+                     style="background-image: url('{{ image_src|escape }}')"></div>
+                <div x-show="hovering"
+                     class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center bg-slate-800 bg-opacity-70 p-6 justify-around">
+                    <!-- Text content -->
+                    {% if content %}
+                        <p class="text-white text-sm">
+                            {{ content|escape }}
+                        </p>
+                    {% endif %}
+                    <!-- Button -->
+                    <a class="px-3 py-2 bg-white rounded-md text-sm text-amber-500 shadow-md duration-200 transition-all border-2 border-white hover:text-white hover:bg-transparent"
+                       href="{{ button_href|escape }}">
+                        {{ button_label|escape }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Tailwind classes: text-black text-amber-600 border-amber-600 border-transparent -->
+        <p class="uppercase text-center font-semibold border-b-2 pointer-events-none"
+           :class="{ 'text-black': !hovering, 'text-amber-600': hovering, 'border-amber-600': hovering, 'border-transparent': !hovering }">
+            {{ title|escape }}
+        </p>
+    </div>
+</div>

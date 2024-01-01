@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+    Home
+{% endblock title %}
+{% block content %}
+    <header class="relative h-[70vh]">
+        <div class="absolute bg-cover bg-fixed bg-center bg-no-repeat left-0 right-0 top-0 bottom-0"
+             style="background-image: url('{% static 'website/index/head.png' %}')">
+
+        </div>
+        <div class="absolute left-0 right-0 top-0 bottom-0 bg-gradient-to-tl from-slate-900 to-transparent">
+
+        </div>
+        <div class="absolute flex justify-center left-0 right-0 top-0 bottom-0">
+            <div class="container flex flex-row items-end justify-end">
+                <div class="p-8 max-w-[30rem] text-white items-center flex flex-col text-center sm:text-right sm:items-end space-y-4">
+                    <h1 class="text-4xl">Lorem ipsum dolor sit.</h1>
+                    <p class="opacity-80">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eligendi necessitatibus quaerat
+                        quibusdam, ratione sit soluta temporibus? Accusantium aliquid consequuntur, corporis doloremque
+                        id,
+                        iste molestiae optio quasi repellendus sint vitae!
+                    </p>
+                    <a href=""
+                       class="px-4 py-3 bg-white rounded-lg text-amber-500 text-sm font-semibold duration-200 transition-all border-2 border-white hover:text-white hover:bg-transparent">
+                        Some stuff here
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% include 'index/services.html' %}
+    {% include 'index/products.html' %}
+    {% include 'index/gallery.html' %}
+    {% include 'index/products1.html' %}
+    <!-- About -->
+    <div class="flex flex-col items-center">
+        <div class="container grid items-center lg:grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-center bg-no-repeat bg-cover h-96"
+                 style="background-image: url('{% static 'website/index/cabinets.jpg' %}')">
+            </div>
+            <div class="flex flex-col items-end text-right gap-6">
+                <h2 class="text-2xl text-black font-bold">Lorem ipsum dolor sit.</h2>
+                <p class="text-md text-slate-700 leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam commodi excepturi, illo impedit in
+                    iste iure optio possimus saepe veniam?
+                </p>
+                <p class="text-md text-slate-700 leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad aperiam aut corporis, deserunt dicta
+                    error iure laborum numquam quibusdam quis quos sapiente sunt, suscipit, tempora? Ab aut consectetur
+                    ducimus error et eum exercitationem in ipsa, ipsam mollitia non omnis perspiciatis qui quo,
+                    similique veniam vitae? Debitis, doloremque eligendi est incidunt ipsa ipsam odit, omnis ratione
+                    reiciendis reprehenderit sequi suscipit?
+                </p>
+                <div class="flex self-stretch flex-row items-center justify-start gap-2">
+                    <a class="px-3 py-2 bg-black text-white font-semibold text-sm rounded-lg" href="">
+                        Contact us
+                        <span></span>
+                    </a>
+                    <a class="px-3 py-2 bg-amber-500 text-white font-semibold text-sm rounded-lg" href="">
+                        Lorem ipsum dolor.
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Consulting header -->
+    <div class="my-16 h-96 bg-cover bg-center bg-no-repeat flex flex-row justify-center"
+         style="background-image: url('{% static 'website/index/consult/background.jpg' %}')">
+        <div class="container flex flex-col justify-center items-end gap-2">
+            <p class="text-3xl text-white font-bold">Lorem ipsum dolor sit.</p>
+            <p class="text-3xl text-white opacity-85 font-semibold">Lorem ipsum.</p>
+        </div>
+    </div>
+    <!-- Consulting form -->
+    <div class="flex flex-col items-center">
+        <div class="relative container p-8 flex flex-row justify-center rounded-2xl overflow-hidden">
+            <!-- The background image -->
+            <div class="bg-cover bg-center bg-no-repeat absolute top-0 bottom-0 left-0 right-0"
+                 style="background-image: url('{% static 'website/index/consult/background.jpg' %}')">
+            </div>
+            <!-- Dark overlay for background image -->
+            <div class="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-85">
+            </div>
+            <!-- The actual form -->
+            <form class="relative flex flex-col gap-8">
+                {% csrf_token %}
+                <div class="flex flex-col items-center gap-2">
+                    <h2 class="text-xl text-white font-bold">Consulation request form</h2>
+                    <p class="text-md text-white">Please fill out the form below if you request free counsellors to
+                        contact you in the shortest
+                        time</p>
+                </div>
+                <div class="flex flex-row gap-2">
+                    <button class="px-4 py-2 bg-amber-500 text-white uppercase rounded-xl text-xs font-bold"
+                            type="submit">Submit
+                        request
+                    </button>
+                    <input class="grow bg-white bg-opacity-20 px-4 py-3 rounded-xl outline-none border border-white text-sm font-semibold text-white placeholder-white placeholder-opacity-70"
+                           type="tel" placeholder="Phone number"/>
+                    <input class="grow bg-white bg-opacity-20 px-4 py-3 rounded-xl outline-none border border-white text-sm font-semibold text-white placeholder-white placeholder-opacity-70"
+                           type="text" placeholder="Firstname and lastname"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Newest -->
+    {% include 'index/new_products.html' %}
+    <!-- FAQ -->
+    {% include 'index/faq.html' with q_and_as=q_and_as %}
+    <!-- Posts -->
+    {% include 'index/posts.html' with posts=posts %}
+{% endblock %}
