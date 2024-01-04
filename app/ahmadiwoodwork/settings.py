@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os.path
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 SECRET_KEY = 'django-insecure-m27779$j*^o-p&616)5+8z-_$mi86wt43lq&#k39@*$9_@iz4_'
 
@@ -39,7 +40,7 @@ CONTACT_NOTIFICATION_TO_ADDRESSES = ['luke.rieff@gmail.com']
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 # Enables compression.
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
@@ -73,6 +74,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -124,13 +126,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
+LANGUAGE_CODE = 'en'
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('fa', _('Persian')),
+)
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

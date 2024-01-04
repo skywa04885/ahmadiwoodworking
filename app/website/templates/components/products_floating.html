@@ -1,0 +1,18 @@
+{% load static %}
+{% static 'website/index/cabinets.jpg' as cabinets %}
+    <div class="flex flex-col items-center">
+        <div class="container">
+            <div class="flex flex-row justify-end px-8">
+                {% block title %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+<div class="bg-slate-100 flex flex-col items-center mt-24">
+    <div class="container">
+        <div class="grid lg:grid-cols-3 gap-10 lg:gap-20 -translate-y-24">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>

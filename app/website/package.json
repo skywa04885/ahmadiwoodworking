@@ -5,5 +5,8 @@
   "scripts": {
     "tailwind-dev": "npx tailwindcss -i static/website/src/input.css -o static/website/src/output.css --watch",
     "tailwind": "npx tailwindcss -i static/website/src/input.css -o static/website/src/output.css"
+  },
+  "dependencies": {
+    "tailwind-scrollbar": "^3.0.5"
   }
 }

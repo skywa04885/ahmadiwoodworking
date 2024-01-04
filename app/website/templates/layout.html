@@ -46,6 +46,7 @@
         {% endcompress %}
         {# Stylesheets #}
         {% compress css %}
+            <link rel="stylesheet" href="{% static 'website/lib/photoswipe/photoswipe.css' %}" />
             <link rel="stylesheet" href="{% static 'website/src/output.css' %}"/>
             <style>
                 html {
@@ -64,7 +65,7 @@
 <body class="bg-gray-50">
 {% include 'nav.html' %}
 {# The content #}
-<div class="flex flex-col items-stretch gap-16 mb-16">
+<div class="flex flex-col items-stretch">
     {% block content %}
     {% endblock %}
 </div>

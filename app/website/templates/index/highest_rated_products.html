@@ -1,11 +1,11 @@
-{% extends 'components/products_flat.html' %}
+{% extends 'components/products_floating.html' %}
 {% block title %}
     <h2 class="text-xl">
         <strong>Lorem</strong> ipsum dolor.
     </h2>
 {% endblock %}
 {% block content %}
-    {% for product in newest_products %}
+    {% for product in highest_rated_products %}
         {% include 'components/products/product.html' with image_src=product.thumbnail.url title=product.name button_href='' button_label='Read more' %}
     {% endfor %}
 {% endblock %}

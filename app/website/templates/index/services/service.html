@@ -3,16 +3,16 @@
      class="rounded-lg text-center flex flex-col items-stretch border-transparent text-black fill-black border"
      :class="{'border-transparent': !hovering, 'bg-white': hovering, 'shadow-xl': hovering, 'shadow-gray-200': hovering, 'border-gray-200': hovering}">
     <!-- Tailwind classes: bg-slate-50 rounded-lg -->
-    <div class="p-4" :class="{'bg-slate-50': !hovering, 'rounded-lg': !hovering}">
+    <div class="p-4 flex items-center gap-2 flex-row" :class="{'bg-slate-100': !hovering, 'rounded-lg': !hovering}">
         <div class="flex flex-col items-center">
-            <div class="max-w-36 w-full">
+            <div class="max-w-24 w-full">
                 <img alt="Image" src="{{ icon_src }}"/>
             </div>
         </div>
         <p class="text-lg">{{ title|escape }}</p>
     </div>
     <!-- Tailwind classes: invisible -->
-    <p class="font-light text-gray-500 px-4 pb-4" :class="{ 'invisible': !hovering }">{{ content|escape }}</p>
+    <p class="font-light text-sm text-gray-700 px-4 pb-4" :class="{ 'invisible': !hovering }">{{ content|escape }}</p>
 </div>
 
 {#hover:border hover:bg-white hover:shadow-xl hover:shadow-gray-300 hover:border-gray-300#}

@@ -5,59 +5,15 @@
 {% endblock %}
 {% block header %}
     {{ block.super }}
-    {{ picture_urls|json_script:"pictures-data" }}
 {% endblock %}
 {% block content %}
     {% include 'project/header.html' %}
-    <div>
-
+    <div class="flex flex-col items-center py-16">
+        <div class="container flex flex-col lg:flex-row gap-8">
+            {% include 'project/overview.html' %}
+            {% include 'project/carousel.html' %}
+        </div>
     </div>
-{#    <div class="flex flex-col items-center">#}
-{#        <div class="container flex flex-col lg:flex-row lg:items-stretch gap-8 px-4">#}
-{#            <div class="flex flex-col items-stretch gap-4 lg:w-96">#}
-{#                <p class="bg-black rounded-lg px-4 py-2 text-white font-bold uppercase text-center">Features</p>#}
-{#                <ul class="flex flex-col items-stretch gap-2">#}
-{#                    {% with li_class='px-3 py-2 border border-gray-200 bg-white rounded-lg text-right shadow-lg shadow-gray-200 text-gray-700 text-sm' %}#}
-{#                        <li class="{{ li_class }}">#}
-{#                            Year of construction: {{ project.construction_date|date:"Y" }}#}
-{#                        </li>#}
-{#                        <li class="{{ li_class }}">#}
-{#                            City {{ project.construction_date|date:"Y" }}#}
-{#                        </li>#}
-{#                        <li class="{{ li_class }}">#}
-{#                            Colors: {{ colors|join:", " }}#}
-{#                        </li>#}
-{#                    {% endwith %}#}
-{#                </ul>#}
-{#            </div>#}
-{#            <div x-data="{ pictures: [], currentPictureIndex: 0 }"#}
-{#                 x-entrypoint="pictures = JSON.parse(document.getElementById('pictures-data').textContent)"#}
-{#                 class="flex-grow flex flex-col lg:flex-row gap-4 items-stretc h-96">#}
-{#                <div :style="{ backgroundImage: `url('${pictures[currentPictureIndex]}')` }" x-ref="preview"#}
-{#                     class="grow bg-black bg-cover bg-center bg-no-repeat rounded-xl">#}
-{#                </div>#}
-                {# TODO: Horizontal scrolling #}
-{#                <div class="overflow-y-auto overflow-x-auto">#}
-{#                    <div class="flex flex-row lg:flex-col items-center gap-4">#}
-{#                        <template x-for="(picture, index) in pictures">#}
-{#                            <!-- Tailwind classes: opacity-50 -->#}
-{#                            <button class="h-24 w-36 bg-cover bg-center bg-no-repeat rounded-md transition-opacity duration-200"#}
-{#                                    :class="{ 'opacity-50': currentPictureIndex !== index }"#}
-{#                                    :style="{ backgroundImage: `url('${picture}')` }"#}
-{#                                    @click="currentPictureIndex = index">#}
-{##}
-{#                            </button>#}
-{#                        </template>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="flex flex-col items-center">#}
-{#        <div class="container">#}
-{#            {% for product in products %}#}
-{#                {{ product.name }}#}
-{#            {% endfor %}#}
-{#        </div>#}
-{#    </div>#}
+    {% include 'project/products.html' %}
+    {% include 'components/consulting_form.html' %}
 {% endblock %}

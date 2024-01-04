@@ -1,31 +1,37 @@
-from django.core.handlers.wsgi import WSGIRequest
 from django.core.paginator import Paginator, Page
 from django.db.models import QuerySet
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 
-from .models import QAndA, Post, ContactMessage, Project, Product, ProjectPicture, Color
+from .models import QAndA, Post, ContactMessage, Project, Product, ProjectPicture, Color, ProductAdvantage, \
+    ProductDisadvantage
 from .forms import ContactForm
 
 
-def index(request: WSGIRequest):
+def index(request: HttpRequest) -> HttpResponse:
     """
     This view handles the index page.
     """
 
+    newest_products: QuerySet[Product] = Product.objects.all().order_by('-id')[:6]
+    highest_rated_products: QuerySet[Product] = Product.objects.all()[:3]
+
     # Get the Q&A and posts.
-    q_and_as = QAndA.objects.all()
-    posts = Post.objects.all().order_by('-date')[:4]
+    q_and_as: QuerySet[QAndA] = QAndA.objects.all()
+    posts: QuerySet[Post] = Post.objects.all().order_by('-date')[:4]
 
     # Render the index page.
     return render(request, 'index.html', {
         'q_and_as': q_and_as,
         'posts': posts,
+        'newest_products': newest_products,
+        'highest_rated_products': highest_rated_products
     })
 
 
-def contact(request: WSGIRequest):
+def contact(request: HttpRequest) -> HttpResponse:
     """
     This view handles the contact form.
     """
@@ -60,7 +66,7 @@ def contact(request: WSGIRequest):
     return render(request, 'contact.html', {'form': form})
 
 
-def post(request: WSGIRequest, post_id):
+def post(request: HttpRequest, post_id) -> HttpResponse:
     """
     This view handles the post page.
     """
@@ -72,7 +78,7 @@ def post(request: WSGIRequest, post_id):
     return render(request, 'post.html', {'post': post})
 
 
-def about(request: WSGIRequest):
+def about(request: HttpRequest) -> HttpResponse:
     """
     This view handles the about page.
     """
@@ -80,7 +86,7 @@ def about(request: WSGIRequest):
     return render(request, 'about.html')
 
 
-def contact_thanks(request: WSGIRequest):
+def contact_thanks(request: HttpRequest) -> HttpResponse:
     """
     This view handles the contact form.
     """
@@ -88,7 +94,7 @@ def contact_thanks(request: WSGIRequest):
     return render(request, 'contact-thanks.html')
 
 
-def portfolio(request: WSGIRequest):
+def portfolio(request: HttpRequest) -> HttpResponse:
     """
     This view handles the portfolio page.
     """
@@ -108,7 +114,8 @@ def portfolio(request: WSGIRequest):
     })
 
 
-def project(request: WSGIRequest, project_id: int):
+# noinspection PyShadowingNames
+def project(request: HttpRequest, project_id: int) -> HttpResponse:
     """
     This view handles the project page.
     """
@@ -131,4 +138,19 @@ def project(request: WSGIRequest, project_id: int):
         'pictures': pictures,
         'colors': colors,
         'picture_urls': picture_urls
+    })
+
+
+# noinspection PyShadowingNames
+def product(request: HttpRequest, product_id: int) -> HttpResponse:
+    # Get the product and it's advantages and disadvantages.
+    product: Product = Product.objects.get(pk=product_id)
+    advantages: QuerySet[ProductAdvantage] = product.advantages.all()
+    disadvantages: QuerySet[ProductDisadvantage] = product.disadvantages.all()
+
+    # Renders the product page.
+    return render(request, 'product.html', {
+        'product': product,
+        'advantages': advantages,
+        'disadvantages': disadvantages
     })
