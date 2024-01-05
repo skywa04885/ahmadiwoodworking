@@ -49,7 +49,7 @@ def contact(request: HttpRequest) -> HttpResponse:
             # Send email to the website owner.
             no_sent_messages = send_mail(f'Contact notification for submission by {name}',
                                          f'Name: {name}\nPhone: {phone}\nMessage: {message}',
-                                         settings.CONTACT_NOTIFICATION_FROM_ADDRESS,
+                                         settings.EMAIL_HOST_USER,
                                          settings.CONTACT_NOTIFICATION_TO_ADDRESSES,
                                          fail_silently=True)
 
@@ -192,7 +192,7 @@ def request_consultation(request: HttpRequest) -> HttpResponse:
             no_sent_messages = send_mail(
                 f'Consultation request notification for submission by {name}',
                 f'Name: {name}\nPhone: {phone}',
-                settings.CONSULTATION_REQUEST_NOTIFICATION_FROM_ADDRESS,
+                settings.EMAIL_HOST_USER,
                 settings.CONSULTATION_REQUEST_NOTIFICATION_TO_ADDRESSES,
                 fail_silently=True)
 

@@ -34,7 +34,6 @@ ALLOWED_HOSTS = []
 
 DEBUG = True
 
-CONTACT_NOTIFICATION_FROM_ADDRESS = 'luke.rieff@gmail.com'
 CONTACT_NOTIFICATION_TO_ADDRESSES = ['luke.rieff@gmail.com']
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
