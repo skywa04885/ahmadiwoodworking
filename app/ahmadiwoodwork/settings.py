@@ -158,3 +158,11 @@ STATICFILES_FINDERS = (  ##django compressor
     # other finders..
     'compressor.finders.CompressorFinder',
 )
+
+# The URLs for the social media.
+SOCIALS_BALE_URL = ''
+SOCIALS_WHATSAPP_URL = ''
+
+# The contact information.
+PHONE_NUMBER = "+989122962718"
+EMAIL = ""

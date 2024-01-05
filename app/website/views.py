@@ -6,8 +6,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 from .models import QAndA, Post, ContactMessage, Project, Product, ProjectPicture, Color, ProductAdvantage, \
-    ProductDisadvantage
-from .forms import ContactForm
+    ProductDisadvantage, ConsultationRequest
+from .forms import ContactForm, ConsultRequestForm
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -131,13 +131,16 @@ def project(request: HttpRequest, project_id: int) -> HttpResponse:
     # Constructs a list containing all the picture urls from the pictures list.
     picture_urls: list[str] = [picture.picture.url for picture in pictures]
 
+    consult_request_form = ConsultRequestForm()
+
     # Render the project page.
     return render(request, 'project.html', {
         'project': project,
         'products': products,
         'pictures': pictures,
         'colors': colors,
-        'picture_urls': picture_urls
+        'picture_urls': picture_urls,
+        'consult_request_form': consult_request_form
     })
 
 
@@ -151,8 +154,10 @@ def product(request: HttpRequest, product_id: int) -> HttpResponse:
     # Gets the latest 4 posts.
     posts: QuerySet[Post] = Post.objects.all().order_by('-date')[:4]
 
-    # Gets all the projcets using this product.
+    # Gets all the projects using this product.
     projects: QuerySet[Project] = product.projects.all()
+
+    consult_request_form = ConsultRequestForm()
 
     # Renders the product page.
     return render(request, 'product.html', {
@@ -160,17 +165,47 @@ def product(request: HttpRequest, product_id: int) -> HttpResponse:
         'advantages': advantages,
         'disadvantages': disadvantages,
         'posts': posts,
-        'projects': projects
+        'projects': projects,
+        'consult_request_form': consult_request_form
     })
 
-# noinspection PyShadowingNames
-def post(request: HttpRequest, post_id: int) -> HttpResponse:
+
+def request_consultation(request: HttpRequest) -> HttpResponse:
     """
-    This view handles the post page.
+    This view handles the consultation request form.
     """
 
-    post = Post.objects.get(pk=post_id)
+    # Check if the form has been submitted.
+    if request.method == 'POST':
+        # Get the redirection target from the request.
+        redirection_target: str = request.GET.get('redirection_target', 'index')
 
-    return render(request, 'post.html', {
-        'post': post
-    })
+        # Create a form instance and populate it with data from the request.
+        form = ConsultRequestForm(request.POST)
+
+        # Get the form data.
+        name, phone = form.data['name'], form.data['phone']
+
+        # Check if the form is valid.
+        if form.is_valid():
+            # Send email to the website owner.
+            no_sent_messages = send_mail(
+                f'Consultation request notification for submission by {name}',
+                f'Name: {name}\nPhone: {phone}',
+                settings.CONSULTATION_REQUEST_NOTIFICATION_FROM_ADDRESS,
+                settings.CONSULTATION_REQUEST_NOTIFICATION_TO_ADDRESSES,
+                fail_silently=True)
+
+            # Save the consultation request to the database.
+            consultation_request = ConsultationRequest(
+                name=name, phone=phone,
+                notified=no_sent_messages == len(
+                    settings.CONSULTATION_REQUEST_NOTIFICATION_TO_ADDRESSES))
+            consultation_request.save()
+
+            return redirect(redirection_target)
+    else:
+        form = ConsultRequestForm()
+
+    # Render the consultation request page.
+    return render(request, 'request-consultation.html', {'form': form})
