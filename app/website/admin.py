@@ -1,15 +1,6 @@
 from django.contrib import admin
 from .models import Post, QAndA, Product, ProductAdvantage, ProductDisadvantage, Project, ContactMessage, \
-    ProjectPicture, Color
-
-
-@admin.register(ProductAdvantage)
-class ProductAdvantageAdmin(admin.ModelAdmin):
-    """
-    This class handles the product advantage admin page.
-    """
-
-    pass
+    ProjectPicture, Color, ConsultationRequest
 
 
 class ProductAdvantageInline(admin.TabularInline):
@@ -19,15 +10,6 @@ class ProductAdvantageInline(admin.TabularInline):
 
     model = ProductAdvantage
     extra = 1
-
-
-@admin.register(ProductDisadvantage)
-class ProductDisadvantageAdmin(admin.ModelAdmin):
-    """
-    This class handles the product disadvantage admin page.
-    """
-
-    pass
 
 
 class ProductDisadvantageInline(admin.TabularInline):
@@ -108,3 +90,19 @@ class ColorAdmin(admin.ModelAdmin):
     """
 
     pass
+
+
+@admin.register(ConsultationRequest)
+class ConsultationRequestAdmin(admin.ModelAdmin):
+    """
+    This class handles the consultation request admin page.
+    """
+
+    readonly_fields = ('notified', 'name', 'phone')
+
+    def has_add_permission(self, request, obj=None):
+        """
+        This method handles the add permission.
+        """
+
+        return False

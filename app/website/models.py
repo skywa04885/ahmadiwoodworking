@@ -84,7 +84,7 @@ class Project(models.Model):
     Model for projects
     """
 
-    thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='posts/thumbnails/',
+    thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='project/thumbnails/',
                                   force_format='JPEG', quality=75)
     name = models.CharField(max_length=100)
     construction_date = models.DateField()
@@ -156,9 +156,30 @@ class QAndA(models.Model):
     question = models.CharField(max_length=100)
     answer = RichTextUploadingField()
 
+    class Meta:
+        verbose_name = 'Q&A'
+        verbose_name_plural = 'Q&As'
+
     def __str__(self):
         """
         Returns the question
         """
 
         return self.question
+
+
+class ConsultationRequest(models.Model):
+    """
+    Model for consultation requests
+    """
+
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
+    notified = models.BooleanField()
+
+    def __str__(self):
+        """
+        Returns the name.
+        """
+
+        return "Consultation request by " + self.name

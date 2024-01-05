@@ -148,9 +148,29 @@ def product(request: HttpRequest, product_id: int) -> HttpResponse:
     advantages: QuerySet[ProductAdvantage] = product.advantages.all()
     disadvantages: QuerySet[ProductDisadvantage] = product.disadvantages.all()
 
+    # Gets the latest 4 posts.
+    posts: QuerySet[Post] = Post.objects.all().order_by('-date')[:4]
+
+    # Gets all the projcets using this product.
+    projects: QuerySet[Project] = product.projects.all()
+
     # Renders the product page.
     return render(request, 'product.html', {
         'product': product,
         'advantages': advantages,
-        'disadvantages': disadvantages
+        'disadvantages': disadvantages,
+        'posts': posts,
+        'projects': projects
+    })
+
+# noinspection PyShadowingNames
+def post(request: HttpRequest, post_id: int) -> HttpResponse:
+    """
+    This view handles the post page.
+    """
+
+    post = Post.objects.get(pk=post_id)
+
+    return render(request, 'post.html', {
+        'post': post
     })

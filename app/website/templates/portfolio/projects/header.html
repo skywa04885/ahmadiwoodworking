@@ -1,0 +1,13 @@
+{% extends 'components/projects/header.html' %}
+{% block content %}
+    <form method="GET">
+        <div class="flex items-stretch justify-end gap-2">
+            <button type="submit" class="bg-amber-500 px-4 py-2 text-white rounded-md text-sm font-semibold">
+                Search
+            </button>
+            <input name="query" type="text" placeholder="Query ..." {% if query %}
+                   value="{{ query|escape }}" {% endif %}
+                   class="border-2 border-amber-500 rounded-md px-4 text-right placeholder-gray-800 text-amber-500 outline-none"/>
+        </div>
+    </form>
+{% endblock %}
