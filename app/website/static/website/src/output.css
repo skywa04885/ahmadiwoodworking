@@ -753,6 +753,14 @@ video {
   height: 70vh;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
+.h-0 {
+  height: 0px;
+}
+
 .w-14 {
   width: 3.5rem;
 }
@@ -779,6 +787,18 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-16 {
+  width: 4rem;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
+.w-9 {
+  width: 2.25rem;
 }
 
 .max-w-24 {
@@ -977,6 +997,10 @@ video {
 
 .self-stretch {
   align-self: stretch;
+}
+
+.justify-self-end {
+  justify-self: end;
 }
 
 .overflow-hidden {
@@ -1194,6 +1218,10 @@ video {
 
 .fill-white {
   fill: #fff;
+}
+
+.fill-amber-500 {
+  fill: #f59e0b;
 }
 
 .p-1 {
@@ -1709,6 +1737,10 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.hover\:fill-white:hover {
+  fill: #fff;
+}
+
 .hover\:text-amber-500:hover {
   --tw-text-opacity: 1;
   color: rgb(245 158 11 / var(--tw-text-opacity));
@@ -1762,6 +1794,14 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1773,6 +1813,10 @@ video {
 }
 
 @media (min-width: 1024px) {
+  .lg\:flex {
+    display: flex;
+  }
+
   .lg\:w-96 {
     width: 24rem;
   }
