@@ -40,7 +40,7 @@ CONTACT_NOTIFICATION_TO_ADDRESSES = ['luke.rieff@gmail.com']
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 # Enables compression.
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
