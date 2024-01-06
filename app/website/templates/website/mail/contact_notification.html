@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اطلاعیه تماس</title>
+  </head>
+  <body>
+    <h1>اطلاعیه تماس</h1>
+    <p>سلام،</p>
+    <p>کسی درخواست تماسی ارسال کرده است. لطفاً اطلاعات زیر را بررسی کنید:</p>
+    <ul>
+      <li>نام: {{ name }}</li>
+      <li>تلفن: <a href="tel:{{ phone }}">{{ phone }}</a></li>
+      <li>پیام: {{ message }}</li>
+      <li>تاریخ: {% now "Y-m-d H:i" %}</li>
+    </ul>
+    <p>با تشکر</p>
+    <p>سیستم</p>
+  </body>
+</html>
