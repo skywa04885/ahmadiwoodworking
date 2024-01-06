@@ -15,5 +15,7 @@
         </div>
     </div>
     {% include 'project/products.html' %}
-    {% include 'components/consulting_form.html' %}
+
+    {% url 'project' project.id as consulting_form_redirection_target %}
+    {% include 'components/consulting_form.html' with redirection_target=consulting_form_redirection_target %}
 {% endblock %}

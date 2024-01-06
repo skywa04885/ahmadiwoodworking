@@ -6,7 +6,6 @@
 {% endblock %}
 {% block content %}
     {% for product in products %}
-        {% url 'product' product.id as product_url %}
-        {% include 'components/products/product.html' with image_src=product.thumbnail.url title=product.name button_href=product_url button_label='Read more' %}
+        {% include 'components/products/product.html' with product=product %}
     {% endfor %}
 {% endblock %}

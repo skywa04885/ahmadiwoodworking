@@ -1,0 +1,11 @@
+{% extends 'components/header.html' %}
+{% load i18n %}
+{% load static %}
+{% block header %}
+  {% static 'website/index/head.jpeg' as background %}
+  {% trans 'Products' as title %}
+  {{ block.super }}
+{% endblock %}
+{% block content %}
+  {% include 'website/products/header/breadcrumb.html' %}
+{% endblock %}

@@ -13,7 +13,9 @@
                          :class="{'bg-opacity-50': !hovering, 'bg-opacity-70': hovering }">
                         <p class="text-white text-2xl font-semibold uppercase">{{ project.name }}</p>
                         <a class="bg-white px-6 py-1 text-black self-end rounded-bl-xl rounded-tr-xl text-sm border-2 border-transparent hover:border-white hover:text-white hover:bg-transparent transition-colors duration-200"
-                           href="{% url 'project' project.id %}">View project</a>
+                           href="{% url 'project' project.id %}">
+                            {% blocktrans %}View project{% endblocktrans %}
+                        </a>
                     </div>
                 </div>
             {% endfor %}
@@ -21,7 +23,7 @@
     {% else %}
         <div class="container flex flex-col justify-center">
             <p class="text-center text-sm font-medium text-gray-700 text-2xl">
-                {% translate 'No projects found' %}
+                {% blocktrans %}No projects found{% endblocktrans %}
             </p>
         </div>
     {% endif %}

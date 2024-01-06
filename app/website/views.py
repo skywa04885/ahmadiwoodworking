@@ -71,8 +71,12 @@ def contact(request: HttpRequest) -> HttpResponse:
             html_template = get_template("website/mail/contact_notification.html")
 
             # Render the email templates.
-            txt_content = txt_template.render({"name": name, "phone": phone, "message": message})
-            html_content = html_template.render({"name": name, "phone": phone, "message": message})
+            txt_content = txt_template.render(
+                {"name": name, "phone": phone, "message": message}
+            )
+            html_content = html_template.render(
+                {"name": name, "phone": phone, "message": message}
+            )
 
             # Send email to the website owner.
             n_messages_sent = send_mail(
@@ -89,10 +93,7 @@ def contact(request: HttpRequest) -> HttpResponse:
 
             # Save the contact message to the database.
             contact_message = ContactMessage(
-                name=name,
-                phone=phone,
-                message=message,
-                notified=notified
+                name=name, phone=phone, message=message, notified=notified
             )
             contact_message.save()
 
@@ -156,6 +157,7 @@ def portfolio(request: HttpRequest) -> HttpResponse:
         "portfolio.html",
         {
             "page": page,
+            "query": query,
         },
     )
 
@@ -232,7 +234,7 @@ def request_consultation(request: HttpRequest) -> HttpResponse:
     # Check if the form has been submitted.
     if request.method == "POST":
         # Get the redirection target from the request.
-        redirection_target: str = request.GET.get("redirection_target", "index")
+        redirection_target: str = request.POST.get("redirection_target", "index")
 
         # Create a form instance and populate it with data from the request.
         form = ConsultRequestForm(request.POST)
@@ -265,7 +267,7 @@ def request_consultation(request: HttpRequest) -> HttpResponse:
 
             # Save the consultation request to the database.
             consultation_request = ConsultationRequest(
-                name=name, phone=phone, company_notified=notified
+                name=name, phone=phone, notified=notified
             )
             consultation_request.save()
 
@@ -273,3 +275,33 @@ def request_consultation(request: HttpRequest) -> HttpResponse:
             return redirect(redirection_target)
     else:
         return HttpResponseBadRequest("Invalid request.")
+
+
+def products(request: HttpRequest) -> HttpResponse:
+    """
+    View function for displaying all products.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response object containing the rendered products page.
+    """
+
+    # Get the query and page number from the request.
+    query: str | None = request.GET.get("query")
+    page: int = request.GET.get("page", 1)
+
+    # Get the products.
+    query_set: QuerySet[Product] = (
+        Product.objects.filter(name__icontains=query)
+        if query
+        else Product.objects.all()
+    )
+
+    # Performs the pagination.
+    paginator: Paginator = Paginator(query_set, 3)
+    page: Page = paginator.get_page(page)
+
+    # Renders the products page.
+    return render(request, "website/products.html", {"page": page, "query": query})

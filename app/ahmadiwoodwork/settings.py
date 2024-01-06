@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 DEBUG = True
 
 CONTACT_NOTIFICATION_TO_ADDRESSES = ['luke.rieff@gmail.com']
+CONSULTATION_REQUEST_NOTIFICATION_TO_ADDRESSES = ['luke.rieff@gmail.com']
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    {% blocktrans %}Products{% endblocktrans %}
+{% endblock %}
+{% block content %}
+    {% with products=page.object_list %}
+        {% include 'website/products/header.html' %}
+        {% include 'website/products/products.html' %}
+    {% endwith %}
+{% endblock %}

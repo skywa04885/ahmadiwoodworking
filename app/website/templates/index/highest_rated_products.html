@@ -6,6 +6,6 @@
 {% endblock %}
 {% block content %}
     {% for product in highest_rated_products %}
-        {% include 'components/products/product.html' with image_src=product.thumbnail.url title=product.name button_href='' button_label='Read more' %}
+        {% include 'components/products/product.html' with product=product %}
     {% endfor %}
 {% endblock %}
