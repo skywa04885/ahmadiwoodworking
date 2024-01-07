@@ -1,22 +1,24 @@
+{% load i18n %}
 {% load static %}
 <nav class="fixed top-0 left-0 right-0 z-10"
      x-data="{ expanded: false }">
     {# Topbar #}
     <!-- Tailwind classes: bg-black bg-opacity-10 text-white bg-white bg-black shadow-lg -->
     <div x-data="{ transparent: true }"
-        @scroll.window="transparent = window.scrollY < 20"
-        class="flex items-center justify-center p-2 duration-200 transition-all"
-        :class="{ 'bg-black bg-opacity-10 text-white': transparent &amp;&amp; !expanded, 'bg-white text-black shadow-lg': !transparent || expanded }">
+         @scroll.window="transparent = window.scrollY < 20"
+         class="flex items-center justify-center p-2 duration-200 transition-all"
+         :class="{ 'bg-black bg-opacity-10 text-white': transparent &amp;&amp; !expanded, 'bg-white text-black shadow-lg': !transparent || expanded }">
         <div class="container flex flex-row justify-between sm:justify-normal items-center space-x-8">
             {# Contact info #}
             <div class="items-center flex-row space-x-4 hidden sm:flex">
                 <img src="{% static 'website/nav/phone-icon.png' %}" alt="Phone icon"/>
                 <p class="text-sm">
-                    <span class="text-amber-400">0912</span> - 8728242<br />
-                    Call now
+                    <span class="text-amber-400">0912</span> - 8728242<br/>
+                    {% translate 'Call now' %}
                 </p>
-                <a href="tel:+310640435602" class="rounded-lg bg-black text-sm px-3 py-2 text-white hover:bg-white hover:text-black transition-all duration-200">
-                    Free advice
+                <a href="tel:+310640435602"
+                   class="rounded-lg bg-black text-sm px-3 py-2 text-white hover:bg-white hover:text-black transition-all duration-200">
+                    {% translate 'Free advice' %}
                 </a>
             </div>
             {# Filler #}
@@ -25,28 +27,38 @@
             </div>
             {# Desktop navigation list #}
             <div class="justify-end flex-row space-x-4 text-sm font-semibold hidden md:flex">
-                <a href="{% url 'about' %}">About us</a>
-                <a href="{% url 'contact' %}">Contact us</a>
-                <a href="">Articles</a>
-                <a href="{% url 'portfolio' %}">Portfolio</a>
-                <a href="{% url 'products' %}">Products</a>
+                <a href="{% url 'about' %}">
+                    {% translate 'About us' %}
+                </a>
+                <a href="{% url 'contact' %}">
+                    {% translate 'Contact us' %}
+                </a>
+                <a href="{% url 'posts' %}">
+                    {% translate 'Posts' %}
+                </a>
+                <a href="{% url 'portfolio' %}">
+                    {% translate 'Portfolio' %}
+                </a>
+                <a href="{% url 'products' %}">
+                    {% translate 'Products' %}
+                </a>
             </div>
             {# Mobile navigation expander #}
             <div>
                 <button @click="expanded = !expanded"
-                    type="button"
-                    class="relative w-12 h-12 bg-black p-1 border border-amber-500 rounded-md fill-amber-500 hover:fill-white hover:border-white block md:hidden">
-                <!-- Tailwind classes: opacity-0 rotate-[360deg] -->
-                <span class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center duration-200 transition-transform"
-                      :class="{ 'opacity-0': expanded, 'rotate-[360deg]': expanded }">
+                        type="button"
+                        class="relative w-12 h-12 bg-black p-1 border border-amber-500 rounded-md fill-amber-500 hover:fill-white hover:border-white block md:hidden">
+                    <!-- Tailwind classes: opacity-0 rotate-[360deg] -->
+                    <span class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center duration-200 transition-transform"
+                          :class="{ 'opacity-0': expanded, 'rotate-[360deg]': expanded }">
                         {% include 'website/icons/menu.html' %}
                     </span>
-                <!-- Tailwind classes: opacity-0 rotate-[360deg] -->
-                <span class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center duration-200 transition-transform"
-                      :class="{ 'opacity-0': !expanded, 'rotate-[360deg]': expanded }">
+                    <!-- Tailwind classes: opacity-0 rotate-[360deg] -->
+                    <span class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center duration-200 transition-transform"
+                          :class="{ 'opacity-0': !expanded, 'rotate-[360deg]': expanded }">
                         {% include 'website/icons/close.html' %}
                     </span>
-            </button>
+                </button>
             </div>
             <div class="flex flex-row">
                 <a href="{% url 'index' %}"
@@ -58,28 +70,39 @@
         </div>
     </div>
     {# Mobile nav #}
-    <!-- Tailwind classes: opacity-0 opacity-100 -->
-    <div class="transition-all duration-200 md:hidden overflow-hidden bg-white shadow-lg" :class="{ 'opacity-0': !expanded, 'opacity-100': expanded }">
+    <!-- Tailwind classes: opacity-0 opacity-100 pointer-events-none -->
+    <div class="transition-all duration-200 md:hidden overflow-hidden bg-white shadow-lg"
+         :class="{ 'opacity-0 pointer-events-none': !expanded, 'opacity-100': expanded }">
         <ul class="flex flex-col items-stretch text-right">
             <li class="flex flex-col items-stretch">
                 <a class="px-4 py-2 text-black hover:bg-black hover:text-white font-medium"
-                   href="{% url 'about' %}">About us</a>
+                   href="{% url 'about' %}">
+                    {% translate 'About us' %}
+                </a>
             </li>
             <li class="flex flex-col items-stretch">
                 <a class="px-4 py-2 text-black hover:bg-black hover:text-white font-medium"
-                   href="{% url 'contact' %}">Contact us</a>
+                   href="{% url 'contact' %}">
+                    {% translate 'Contact us' %}
+                </a>
             </li>
             <li class="flex flex-col items-stretch">
                 <a class="px-4 py-2 text-black hover:bg-black hover:text-white font-medium"
-                   href="">Articles</a>
+                   href="{% url 'posts' %}">
+                    {% translate 'Posts' %}
+                </a>
             </li>
             <li class="flex flex-col items-stretch">
                 <a class="px-4 py-2 text-black hover:bg-black hover:text-white font-medium"
-                   href="{% url 'portfolio' %}">Portfolio</a>
+                   href="{% url 'portfolio' %}">
+                    {% translate 'Portfolio' %}
+                </a>
             </li>
             <li class="flex flex-col items-stretch">
                 <a class="px-4 py-2 text-black hover:bg-black hover:text-white font-medium"
-                   href="{% url 'products' %}">Products</a>
+                   href="{% url 'products' %}">
+                    {% translate 'Products' %}
+                </a>
             </li>
         </ul>
     </div>

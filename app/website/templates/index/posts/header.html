@@ -1,0 +1,24 @@
+{# Extends #}
+{% extends "website/sections/base/header.html" %}
+
+{# Loading of modules #}
+{% load i18n %}
+
+{# Content block #}
+{% block content %}
+    <div class="flex flex-row items-center justify-between">
+        <a class="text-sm text-black hover:text-amber-500" href="{% url 'posts' %}">
+            {% translate 'View more' %}
+        </a>
+        <h2 class="font-bold text-black text-lg">
+            {% translate 'Posts' %}
+        </h2>
+    </div>
+{% endblock %}
+
+{# Wrapper block #}
+{% block wrapper %}
+    {% with class='bg-white' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock wrapper %}

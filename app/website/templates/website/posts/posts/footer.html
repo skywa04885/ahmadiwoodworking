@@ -1,0 +1,7 @@
+{# Extends #}
+{% extends "website/sections/base/footer.html" %}
+
+{# Content block #}
+{% block content %}
+    {% include 'components/paginator.html' with query_param_name='page' %}
+{% endblock %}

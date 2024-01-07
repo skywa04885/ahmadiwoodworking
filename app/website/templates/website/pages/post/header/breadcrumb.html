@@ -1,0 +1,13 @@
+{% extends 'components/breadcrumb.html' %}
+{% load i18n %}
+{% block items %}
+    {% url "index" as index_url %}
+    {% url "posts" as posts_url %}
+    {% url "post" post.id as post_url %}
+    
+    {% translate "Posts" as posts_name %}
+
+    {% include 'components/breadcrumb/item.html' with name='Ahmadi Woodworking' url=index_url %}
+    {% include 'components/breadcrumb/item.html' with name=posts_name url=posts_url %}
+    {% include 'components/breadcrumb/item.html' with name=post.title url=post_url %}
+{% endblock %}

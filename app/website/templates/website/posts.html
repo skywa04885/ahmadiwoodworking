@@ -2,11 +2,11 @@
 {% load i18n %}
 {% load static %}
 {% block title %}
-    {% translate 'Products' %}
+    {% translate 'Posts' %}
 {% endblock %}
 {% block content %}
     {% with products=page.object_list %}
-        {% include 'website/products/header.html' %}
-        {% include 'website/products/products.html' %}
+        {% include 'website/posts/header.html' %}
+        {% include 'website/posts/posts.html' %}
     {% endwith %}
 {% endblock %}

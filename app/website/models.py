@@ -133,7 +133,7 @@ class Post(models.Model):
 
     thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='posts/thumbnails/',
                                   force_format='JPEG', quality=75)
-    banner = ResizedImageField(size=[1280, 720], crop=['middle', 'center'], upload_to='posts/banners/',
+    banner = ResizedImageField(size=[1920, 720], crop=['middle', 'center'], upload_to='posts/banners/',
                                force_format='JPEG', quality=75)
     title = models.CharField(max_length=100)
     content = RichTextUploadingField()

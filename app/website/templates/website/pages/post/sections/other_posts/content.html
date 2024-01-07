@@ -1,0 +1,14 @@
+{# Extends #}
+{% extends "website/sections/base/content.html" %}
+
+{# Content block #}
+{% block content %}
+    {% include 'components/posts.html' with posts=other_posts1 %}
+{% endblock %}
+
+{# Wrapper block #}
+{% block wrapper %}
+    {% with class='bg-white' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock wrapper %}

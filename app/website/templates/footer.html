@@ -1,9 +1,12 @@
+{% load i18n %}
 {% load static %}
 <footer>
     <div class="flex flex-col items-center py-16 text-black shadow-[0_4px_30px_0px_rgba(0,0,0,0.1)] px-4">
         <div class="container grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="flex flex-col items-end gap-4">
-                <p class="font-bold text-lg text-md text-right">Newest posts</p>
+                <p class="font-bold text-lg text-md text-right">
+                    {% translate 'Newest posts' %}
+                </p>
                 <ul class="flex flex-col items-end">
                     {% for post in posts %}
                         <li>
@@ -15,13 +18,17 @@
                 </ul>
             </div>
             <div class="flex flex-col items-stretch gap-4">
-                <p class="font-bold text-lg text-md text-right">Products</p>
+                <p class="font-bold text-lg text-md text-right">
+                    {% translate 'Products' %}
+                </p>
                 <ul class="list text-right">
 
                 </ul>
             </div>
             <div class="flex flex-col items-stretch gap-4 ">
-                <p class="font-bold text-lg text-md text-right">Contact us</p>
+                <p class="font-bold text-lg text-md text-right">
+                    {% translate 'Contact us' %}
+                </p>
                 <div class="flex flex-col items-stretch text-right gap-3">
                     <p class="text-black font-medium">Eslahmshahr - Tehran</p>
                     <p class="text-gray-400 font-medium">Phone number</p>

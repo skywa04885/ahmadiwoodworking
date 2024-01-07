@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load compress %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@
         <title>
             {% block title %}
             {% endblock %}
-            - Ahmadi Woodworking
+            - {% translate 'Ahmadi Woodworking' %}
         </title>
         {# Links #}
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/apple-touch-icon.png' %}"/>

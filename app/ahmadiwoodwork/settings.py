@@ -57,6 +57,7 @@ except ImportError:
 # Application definition
 
 INSTALLED_APPS = [
+    'rosetta',
     'website',
     'jazzmin',
     'ckeditor',

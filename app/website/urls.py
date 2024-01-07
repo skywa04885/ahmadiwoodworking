@@ -13,4 +13,6 @@ urlpatterns = [
     path('post/<int:post_id>/', views.post, name='post'),
     path('request-consultation', views.request_consultation, name='request_consultation'),
     path('products', views.products, name='products'),
+    path('posts', views.posts, name='posts'),
+    path('post/<int:post_id>/post', views.post, name='post'),
 ]

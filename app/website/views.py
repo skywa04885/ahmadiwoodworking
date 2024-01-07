@@ -105,18 +105,6 @@ def contact(request: HttpRequest) -> HttpResponse:
     return render(request, "contact.html", {"form": form})
 
 
-def post(request: HttpRequest, post_id) -> HttpResponse:
-    """
-    This view handles the post page.
-    """
-
-    # Get the post.
-    post = Post.objects.get(pk=post_id)
-
-    # Render the post page.
-    return render(request, "post.html", {"post": post})
-
-
 def about(request: HttpRequest) -> HttpResponse:
     """
     This view handles the about page.
@@ -305,3 +293,62 @@ def products(request: HttpRequest) -> HttpResponse:
 
     # Renders the products page.
     return render(request, "website/products.html", {"page": page, "query": query})
+
+
+def posts(request: HttpRequest) -> HttpResponse:
+    """
+    View function for displaying all posts.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response object containing the rendered posts page.
+    """
+
+    # Get the query and page number from the request.
+    query: str | None = request.GET.get("query")
+    page: int = request.GET.get("page", 1)
+
+    # Get the posts.
+    query_set: QuerySet[Product] = (
+        Post.objects.filter(title__icontains=query)
+        if query
+        else Post.objects.all()
+    )
+
+    # Performs the pagination.
+    paginator: Paginator = Paginator(query_set, 12)
+    page: Page = paginator.get_page(page)
+
+    # Renders the products page.
+    return render(request, "website/posts.html", {
+        "page": page,
+        "query": query
+    })
+
+
+# noinspection PyShadowingNames
+def post(request: HttpRequest, post_id: int) -> HttpResponse:
+    """
+    View function for displaying a post.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        post_id (int): The ID of the post to display.
+
+    Returns:
+        HttpResponse: The HTTP response object containing the rendered post page.
+    """
+
+    # Get the post.
+    post: Post = Post.objects.get(pk=post_id)
+
+    # Gets some other posts.
+    other_posts: QuerySet[Post] = Post.objects.exclude(pk=post.pk).order_by("-date")[:4]
+
+    # Renders the post page.
+    return render(request, "website/pages/post.html", {
+        "post": post,
+        "other_posts": other_posts,
+    })
