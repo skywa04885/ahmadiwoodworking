@@ -4,46 +4,5 @@
     Home
 {% endblock title %}
 {% block content %}
-    <header class="relative h-[70vh]">
-        <div class="absolute bg-cover bg-fixed bg-center bg-no-repeat left-0 right-0 top-0 bottom-0"
-             style="background-image: url('{% static 'website/index/head.jpeg' %}')">
-
-        </div>
-        <div class="absolute left-0 right-0 top-0 bottom-0 bg-gradient-to-tl from-slate-900 to-transparent">
-
-        </div>
-        <div class="absolute flex justify-center left-0 right-0 top-0 bottom-0">
-            <div class="container flex flex-row items-end justify-end">
-                <div class="p-8 max-w-[30rem] text-white items-center flex flex-col text-center sm:text-right sm:items-end gap-6">
-                    <h1 class="text-4xl font-medium">Lorem ipsum dolor sit.</h1>
-                    <p class="opacity-80 font-medium">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eligendi necessitatibus quaerat
-                        quibusdam, ratione sit soluta temporibus? Accusantium aliquid consequuntur, corporis doloremque
-                        id,
-                        iste molestiae optio quasi repellendus sint vitae!
-                    </p>
-                    <a href="{% url "products" %}"
-                       class="px-4 py-3 bg-white rounded-lg text-gold text-sm font-medium duration-200 transition-all border-2 border-white hover:text-white hover:bg-transparent">
-                        View products
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
     {% include "website/pages/index/sections.html" %}
-{#    {% include 'index/services.html' %}#}
-{#    {% include 'index/highest_rated_products.html' %}#}
-{#    {% include 'index/gallery.html' %}#}
-{#    {% include 'index/new_products.html' %}#}
-{#    <!-- About -->#}
-{#    {% include "website/pages/index/sections/about.html" %}#}
-{#    <!-- Consulting header -->#}
-{#    {% include "website/pages/index/sections/consultation_banner.html" %}#}
-{#    <!-- Consulting form -->#}
-{#    {% url 'index' as consulting_form_redirection_target %}#}
-{#    {% include 'components/consulting_form.html' with redirection_target=consulting_form_redirection_target %}#}
-{#    <!-- FAQ -->#}
-{#    {% include "website/pages/index/sections/faq.html" %}#}
-{#    <!-- Posts -->#}
-{#    {% include 'index/newest_projects.html' %}#}
 {% endblock %}

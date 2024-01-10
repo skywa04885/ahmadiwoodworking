@@ -25,6 +25,23 @@ from .models import (
 from .forms import ContactForm, ConsultRequestForm
 
 
+# noinspection PyShadowingNames
+def footer_context() -> Dict[str, Any]:
+    """
+    This function returns the context for the footer.
+    """
+
+    # Gets the footer context.
+    products: QuerySet[Product] = Product.objects.all()[:10]
+    posts: QuerySet[Post] = Post.objects.all()[:10]
+
+    # Returns the footer context.
+    return {
+        "products": products,
+        "posts": posts,
+    }
+
+
 def index(request: HttpRequest) -> HttpResponse:
     """
     This view handles the index page.

@@ -9,39 +9,38 @@
 {% block content %}
     <div class="grid items-stretch lg:grid-cols-2 gap-4">
         <div class="rounded-2xl bg-center bg-no-repeat bg-cover h-96"
-             style="background-image: url('{% static 'website/index/cabinets.jpg' %}')">
+             style="background-image: url('{% static "website/pages/index/sections/about/image.webp" %}')">
         </div>
-        <div class="flex flex-col justify-between text-right gap-6">
-            <div class="flex flex-col gap-8">
-                <h2 class="text-2xl text-black font-bold">
-                    {% translate "About Ahmadi Woodworking" %}
-                </h2>
-                <div class="flex flex-col gap-4">
-                    <p class="text-md text-slate-900 leading-relaxed">
-                        {% blocktranslate %}
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam commodi excepturi, illo
-                            impedit in
-                            iste iure optio possimus saepe veniam?
-                        {% endblocktranslate %}
-                    </p>
-                    <p class="text-md text-slate-900 leading-relaxed">
-                        {% blocktranslate %}
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad aperiam aut corporis,
-                            deserunt
-                            dicta
-                            error iure laborum numquam quibusdam quis quos sapiente sunt, suscipit, tempora? Ab aut
-                            consectetur
-                            ducimus error et eum exercitationem in ipsa.
-                        {% endblocktranslate %}
-                    </p>
-                </div>
+        <div class="flex flex-col justify-between text-right">
+            <h2 class="text-2xl text-slate-900 font-bold">
+                {% translate "About Ahmadi Woodworking" %}
+            </h2>
+            <div class="flex flex-col gap-4 font-light text-md text-slate-700 leading-relaxed">
+                <p>
+                    {% blocktranslate %}
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam commodi excepturi, illo
+                        impedit in
+                        iste iure optio possimus saepe veniam?
+                    {% endblocktranslate %}
+                </p>
+                <p>
+                    {% blocktranslate %}
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad aperiam aut corporis,
+                        deserunt
+                        dicta
+                        error iure laborum numquam quibusdam quis quos sapiente sunt, suscipit, tempora? Ab aut
+                        consectetur
+                        ducimus error et eum exercitationem in ipsa.
+                    {% endblocktranslate %}
+                </p>
             </div>
             <div class="flex self-stretch flex-row items-stretch justify-start gap-2">
-                <a class="px-3 py-2 bg-black text-white font-medium text-sm rounded-lg flex items-center gap-2" href="">
+                <a class="px-3 py-2 bg-slate-950 text-white font-medium text-sm rounded-lg flex items-center gap-2 hover:bg-slate-200 hover:text-slate-950 transition-colors duration-200"
+                   href="{% url "contact" %}">
                     {% include "website/icons/phone_call.html" with class="w-6 h-6" %}
                     {% translate "Contact us" %}
                 </a>
-                <a class="px-3 py-2 bg-gold text-white font-medium text-sm rounded-lg flex items-center"
+                <a class="px-3 py-2 bg-gold text-white font-medium text-sm rounded-lg flex items-center hover:bg-slate-200 hover:text-slate-950 transition-colors duration-200"
                    href="{% url "portfolio" %}">
                     {% translate "Ahmadi Woodworking Portfolio" %}
                 </a>

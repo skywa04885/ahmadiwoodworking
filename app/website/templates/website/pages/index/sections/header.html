@@ -1,0 +1,33 @@
+{% load static %}
+{% load i18n %}
+
+<header class="relative h-screen md:h-[72vh]">
+    <div class="absolute bg-cover bg-fixed bg-center bg-no-repeat left-0 right-0 top-0 bottom-0"
+         style="background-image: url('{% static 'website/pages/index/sections/header/background.webp' %}')">
+
+    </div>
+        <div class="absolute left-0 right-0 top-0 bottom-0 bg-gradient-to-tl from-slate-900 to-transparent">
+
+        </div>
+        <div class="absolute flex justify-center left-0 right-0 top-0 bottom-0">
+            <div class="container flex flex-row items-end justify-center md:justify-end">
+                <div class="p-8 max-w-[30rem] text-white items-center flex flex-col text-center md:text-right md:items-end gap-6 transition-all duration-200">
+                    <h1 class="text-4xl font-medium">
+                        {% translate "Lorem ipsum dolor sit." %}
+                    </h1>
+                    <p class="opacity-80 font-medium">
+                        {% blocktranslate %}
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eligendi necessitatibus quaerat
+                            quibusdam, ratione sit soluta temporibus? Accusantium aliquid consequuntur, corporis doloremque
+                            id,
+                            iste molestiae optio quasi repellendus sint vitae!
+                        {% endblocktranslate %}
+                    </p>
+                    <a href="{% url "products" %}"
+                       class="px-4 py-3 bg-white rounded-lg text-gold text-sm font-medium duration-200 transition-all border-2 border-white hover:text-white hover:bg-transparent">
+                        {% translate "View products" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>

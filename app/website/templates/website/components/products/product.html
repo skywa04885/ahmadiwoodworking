@@ -1,6 +1,7 @@
 {% load i18n %}
 
-<div x-data="{ hovering: false }" @mouseenter="hovering = true" @mouseleave="hovering = false">
+<div x-data="{ hovering: false }" @mouseenter="hovering = true" @mouseleave="hovering = false"
+    class="snap-center shrink-0 w-full">
     <!-- Tailwind classes: -translate-y-4 -->
     <div class="flex flex-col gap-8 items-center transition-transform duration-700"
          :class="{ '-translate-y-4': hovering }">
