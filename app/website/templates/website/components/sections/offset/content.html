@@ -1,0 +1,11 @@
+{% block wrapper %}
+    <div class="flex flex-col items-center mt-36{% if class %} {{ class }}{% endif %}"
+            {% if style %} style="{{ style }}"{% endif %}>
+        <div class="container">
+            <div class="-translate-y-20">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock wrapper %}

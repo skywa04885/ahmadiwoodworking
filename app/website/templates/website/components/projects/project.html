@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<div x-data="{ hovering: false }" @mouseenter="hovering = true" @mouseleave="hovering = false"
+     class="relative h-72 rounded-2xl overflow-hidden">
+    <div class="absolute left-0 right-0 top-0 bottom-0 bg-center bg-cover bg-no-repeat"
+         style="background-image: url('{{ project.thumbnail.url|escape }}')"></div>
+    <div class="absolute left-0 right-0 top-0 bottom-0 bg-black flex flex-col p-8 justify-between items-start transition-colors duration-200"
+         :class="{'bg-opacity-50': !hovering, 'bg-opacity-70': hovering }">
+        <p class="text-white text-2xl font-semibold uppercase backdrop-blur-xl rounded-sm px-1">{{ project.name }}</p>
+        <a class="bg-white px-6 py-1 backdrop-blur-xl text-black self-end rounded-bl-xl rounded-tr-xl text-sm border-2 border-transparent hover:border-white hover:text-white hover:bg-transparent transition-colors duration-200"
+           href="{% url "project" project.id %}">
+            {% translate "View project" %}
+        </a>
+    </div>
+</div>

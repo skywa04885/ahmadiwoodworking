@@ -1,3 +1,5 @@
+from typing import Dict, Any, List
+
 from django.core.paginator import Paginator, Page
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest
@@ -6,6 +8,7 @@ from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from meta.views import Meta
 
 from .models import (
     QAndA,
@@ -29,10 +32,9 @@ def index(request: HttpRequest) -> HttpResponse:
 
     newest_products: QuerySet[Product] = Product.objects.all().order_by("-id")[:6]
     highest_rated_products: QuerySet[Product] = Product.objects.all()[:3]
-
-    # Get the Q&A and posts.
     q_and_as: QuerySet[QAndA] = QAndA.objects.all()
-    posts: QuerySet[Post] = Post.objects.all().order_by("-date")[:4]
+    newest_posts: QuerySet[Post] = Post.objects.all().order_by("-date")[:4]
+    newest_projects: QuerySet[Project] = Project.objects.all().order_by("-id")[:4]
 
     # Render the index page.
     return render(
@@ -40,9 +42,10 @@ def index(request: HttpRequest) -> HttpResponse:
         "index.html",
         {
             "q_and_as": q_and_as,
-            "posts": posts,
+            "newest_posts": newest_posts,
             "newest_products": newest_products,
             "highest_rated_products": highest_rated_products,
+            "newest_projects": newest_projects,
         },
     )
 
@@ -159,6 +162,9 @@ def project(request: HttpRequest, project_id: int) -> HttpResponse:
     # Get the project.
     project: Project = Project.objects.get(pk=project_id)
 
+    # Gets the project meta.
+    meta: Meta = project.as_meta(request)
+
     # Gets all the products, pictures and colors,
     products: QuerySet[Product] = project.products.all()
     pictures: QuerySet[ProjectPicture] = project.pictures.all()
@@ -180,6 +186,7 @@ def project(request: HttpRequest, project_id: int) -> HttpResponse:
             "colors": colors,
             "picture_urls": picture_urls,
             "consult_request_form": consult_request_form,
+            "meta": meta,
         },
     )
 
@@ -191,12 +198,16 @@ def product(request: HttpRequest, product_id: int) -> HttpResponse:
     advantages: QuerySet[ProductAdvantage] = product.advantages.all()
     disadvantages: QuerySet[ProductDisadvantage] = product.disadvantages.all()
 
-    # Gets the latest 4 posts.
+    # Gets the product meta.
+    meta: Meta = product.as_meta(request)
+
+    # Gets the latest 4 newest_projects.
     posts: QuerySet[Post] = Post.objects.all().order_by("-date")[:4]
 
     # Gets all the projects using this product.
     projects: QuerySet[Project] = product.projects.all()
 
+    # Gets the consultation_form request form.
     consult_request_form = ConsultRequestForm()
 
     # Renders the product page.
@@ -207,16 +218,17 @@ def product(request: HttpRequest, product_id: int) -> HttpResponse:
             "product": product,
             "advantages": advantages,
             "disadvantages": disadvantages,
-            "posts": posts,
+            "newest_projects": posts,
             "projects": projects,
             "consult_request_form": consult_request_form,
+            "meta": meta
         },
     )
 
 
 def request_consultation(request: HttpRequest) -> HttpResponse:
     """
-    This view handles the consultation request form.
+    This view handles the consultation_form request form.
     """
 
     # Check if the form has been submitted.
@@ -253,7 +265,7 @@ def request_consultation(request: HttpRequest) -> HttpResponse:
                 settings.CONSULTATION_REQUEST_NOTIFICATION_TO_ADDRESSES
             )
 
-            # Save the consultation request to the database.
+            # Save the consultation_form request to the database.
             consultation_request = ConsultationRequest(
                 name=name, phone=phone, notified=notified
             )
@@ -297,20 +309,20 @@ def products(request: HttpRequest) -> HttpResponse:
 
 def posts(request: HttpRequest) -> HttpResponse:
     """
-    View function for displaying all posts.
+    View function for displaying all newest_projects.
 
     Args:
         request (HttpRequest): The HTTP request object.
 
     Returns:
-        HttpResponse: The HTTP response object containing the rendered posts page.
+        HttpResponse: The HTTP response object containing the rendered newest_projects page.
     """
 
     # Get the query and page number from the request.
     query: str | None = request.GET.get("query")
     page: int = request.GET.get("page", 1)
 
-    # Get the posts.
+    # Get the newest_projects.
     query_set: QuerySet[Product] = (
         Post.objects.filter(title__icontains=query)
         if query
@@ -344,11 +356,15 @@ def post(request: HttpRequest, post_id: int) -> HttpResponse:
     # Get the post.
     post: Post = Post.objects.get(pk=post_id)
 
-    # Gets some other posts.
+    # Gets the post meta.
+    meta: Meta = post.as_meta(request)
+
+    # Gets some other newest_projects.
     other_posts: QuerySet[Post] = Post.objects.exclude(pk=post.pk).order_by("-date")[:4]
 
     # Renders the post page.
     return render(request, "website/pages/post.html", {
         "post": post,
         "other_posts": other_posts,
+        "meta": meta,
     })

@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      viewBox="0 0 24 24"
+        {% if class %} class="{{ class }}" {% endif %}
      {% if width %} width="{{width}}" {% endif %}
      {% if height %} height="{{height}}" {% endif %}>
     <path d="M0 0h24v24H0z" fill="none"></path>

@@ -1,0 +1,65 @@
+{% load i18n %}
+{% load static %}
+
+{% block wrapper %}
+  <div
+    class="relative p-8 flex flex-row justify-center rounded-2xl overflow-hidden"
+  >
+    <!-- The background image -->
+    <div
+      class="bg-cover bg-center bg-no-repeat absolute top-0 bottom-0 left-0 right-0"
+      style="
+        background-image: url('{% static 'website/consulting/background.jpg' %}');
+      "
+    ></div>
+    <!-- Dark overlay for background image -->
+    <div
+      class="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-85"
+    ></div>
+    <!-- The actual form -->
+    <form
+      class="relative flex flex-col gap-8"
+      method="POST"
+      action="{% url 'request_consultation' %}"
+    >
+      {% csrf_token %}
+      <input
+        type="hidden"
+        name="redirection_target"
+        value="{{ redirection_target|escape }}"
+      />
+      <div class="flex flex-col items-center gap-2">
+        <h2 class="text-xl text-white font-bold">{% trans "Consultation request form" %}</h2>
+        <p class="text-md text-white">
+          {% trans "Please fill out the form below if you request free counsellors to contact you in the shortest time." %}
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-2">
+        <button
+          class="px-4 py-2 backdrop-blur-xl hidden sm:block bg-gold text-white uppercase rounded-xl text-xs font-semibold transition-colors duration-200 border-2 border-gold hover:border-white hover:text-white hover:bg-transparent"
+          type="submit"
+        >
+          {% trans "Submit request" %}
+        </button>
+        <input
+          class="grow bg-white backdrop-blur-xl bg-opacity-10 hover:bg-opacity-20 transition-colors duration-200 px-4 py-3 rounded-xl outline-none border border-white border-opacity-60 hover:border-opacity-80 text-sm font-semibold text-white placeholder-white placeholder-opacity-60 hover:placeholder-opacity-80"
+          type="tel"
+          name="phone"
+          placeholder="{% trans "Phone number" %}"
+        />
+        <input
+          class="grow bg-white backdrop-blur-xl bg-opacity-10 hover:bg-opacity-20 transition-colors duration-200 px-4 py-3 rounded-xl outline-none border border-white border-opacity-60 hover:border-opacity-80 text-sm font-semibold text-white placeholder-white placeholder-opacity-60 hover:placeholder-opacity-80"
+          type="text"
+          name="name"
+          placeholder="{% trans "Firstname and lastname" %}"
+        />
+        <button
+          class="p-4 block backdrop-blur-xl sm:hidden bg-gold text-white uppercase rounded-xl text-xs font-semibold transition-colors duration-200 border-2 border-gold hover:border-white hover:text-white hover:bg-transparent"
+          type="submit"
+        >
+          {% translate "Submit request" %}
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

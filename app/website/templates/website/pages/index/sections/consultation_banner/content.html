@@ -1,0 +1,19 @@
+{% extends "website/components/sections/base/content.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <div class="h-64 flex flex-col justify-center items-end gap-2">
+        <p class="text-3xl text-white font-bold backdrop-blur-xl rounded-sm px-1">Lorem ipsum dolor sit.</p>
+        <p class="text-3xl text-white opacity-85 font-semibold backdrop-blur-xl rounded-sm px-1">Lorem ipsum.</p>
+    </div>
+{% endblock %}
+
+{% block wrapper %}
+    {% static "website/pages/index/sections/consultation_banner/background.webp" as background_asset %}
+
+    {% with class="bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('"|add:background_asset|add:"')" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}

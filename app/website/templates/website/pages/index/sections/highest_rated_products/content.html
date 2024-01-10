@@ -1,0 +1,13 @@
+{% extends "website/components/sections/offset/content.html" %}
+
+{% block content %}
+    {% with products=highest_rated_products %}
+        {% include "website/components/products.html" %}
+    {% endwith %}
+{% endblock %}
+
+{% block wrapper %}
+    {% with class="bg-slate-100" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}

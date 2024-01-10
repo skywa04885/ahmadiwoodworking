@@ -1,0 +1,16 @@
+<li x-data="{ hidden: true }" class="flex flex-col items-stretch">
+    <!-- Tailwind classes: font-semibold -->
+    <button @click="hidden = !hidden"
+            class="px-3 py-2 border border-gray-300 rounded-lg justify-end shadow-xl shadow-gray-100 text-gray-700 text-sm flex flex-row items-center gap-2"
+            :class="{ 'font-semibold': !hidden }" type="button">
+        <span>{{ q_and_a.question|escape }}</span>
+        <span class="text-slate-900 font-bold text-lg">&bull;</span>
+    </button>
+    <div :hidden="hidden">
+        <div class="py-4 px-4 flex flex-col items-end text-right text-gray-500 text-sm font-light">
+            {% autoescape off %}
+                {{ q_and_a.answer }}
+            {% endautoescape %}
+        </div>
+    </div>
+</li>

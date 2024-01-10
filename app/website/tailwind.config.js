@@ -19,6 +19,10 @@ module.exports = {
                 padding: '1rem'
             },
         },
+        colors: {
+            ...colors,
+            'gold': '#CB9615'
+        }
 
     },
     plugins: [

@@ -32,24 +32,59 @@ DATABASES = {
 
 ALLOWED_HOSTS = []
 
-DEBUG = True
-
 CONTACT_NOTIFICATION_TO_ADDRESSES = ['luke.rieff@gmail.com']
 CONSULTATION_REQUEST_NOTIFICATION_TO_ADDRESSES = ['luke.rieff@gmail.com']
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
-# Enables compression.
-COMPRESS_ENABLED = True
-COMPRESS_ROOT = STATIC_ROOT
-COMPRESS_OFFLINE = True
-COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
-COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"]
+DEBUG = False
+
+# Meta
+META_SITE_PROTOCOL = 'https'
+META_SITE_DOMAIN = 'ahmadiwoodwork.com'
+META_SITE_NAME = 'Ahmadi Woodwork'
+META_INCLUDE_KEYWORDS = [
+    "woodcraft",
+    "craftsmanship",
+    "joinery",
+    "wooden furniture",
+    "interior design",
+    "bespoke cabinets",
+    "handcrafted",
+    "Tehran woodworkers",
+    "woodworking services",
+    "home improvement",
+    "custom woodwork",
+    "woodworking projects",
+    "fine woodworking",
+    "cabinetmakers",
+    "artisan",
+    "woodshop",
+    "woodworking tools",
+    "Tehran craftsmen",
+    "woodworking techniques",
+    "wood species",
+    "woodworking tips",
+    "cabinet design",
+    "furniture makers",
+    "cabinet refinishing",
+]
 
 try:
     from .settings_local import *
 except ImportError:
     pass
+
+if not DEBUG:
+    # Enables compression.
+    COMPRESS_ENABLED = True
+    COMPRESS_ROOT = STATIC_ROOT
+    COMPRESS_OFFLINE = True
+    COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
+    COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"]
+    COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"
+else:
+    COMPRESS_ENABLED = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -57,11 +92,11 @@ except ImportError:
 # Application definition
 
 INSTALLED_APPS = [
+    'meta',
     'rosetta',
     'website',
     'jazzmin',
     'ckeditor',
-    'taggit',
     'compressor',
     'cssmin',
     'jsmin',

@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<div class="flex flex-col items-center">
+    {% if products %}
+        <div class="container grid lg:grid-cols-3 gap-10 lg:gap-20">
+            {% for product in products %}
+                {% include "website/components/products/product.html" %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="container flex flex-col justify-center">
+            <p class="text-center text-sm font-medium text-gray-700">
+                {% translate "No products found" %}
+            </p>
+        </div>
+    {% endif %}
+</div>

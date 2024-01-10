@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Post, QAndA, Product, ProductAdvantage, ProductDisadvantage, Project, ContactMessage, \
-    ProjectPicture, Color, ConsultationRequest
+    ProjectPicture, Color, ConsultationRequest, ProjectKeyword
 
 
 class ProductAdvantageInline(admin.TabularInline):
@@ -30,6 +30,15 @@ class ProjectPictureInline(admin.TabularInline):
     extra = 1
 
 
+class ProjectKeywordInline(admin.TabularInline):
+    """
+    This class handles the project keyword inline.
+    """
+
+    model = ProjectKeyword
+    extra = 1
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     """
@@ -46,7 +55,7 @@ class ProjectAdmin(admin.ModelAdmin):
     """
 
     filter_horizontal = ('products',)
-    inlines = [ProjectPictureInline]
+    inlines = [ProjectPictureInline, ProjectKeywordInline]
 
 
 @admin.register(ContactMessage)
@@ -95,7 +104,7 @@ class ColorAdmin(admin.ModelAdmin):
 @admin.register(ConsultationRequest)
 class ConsultationRequestAdmin(admin.ModelAdmin):
     """
-    This class handles the consultation request admin page.
+    This class handles the consultation_form request admin page.
     """
 
     readonly_fields = ('notified', 'name', 'phone')

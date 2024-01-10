@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% if posts %}
+    <div class="grid lg:grid-cols-4">
+        {% for post in posts %}
+            {% include "website/components/posts/post.html" %}
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="flex flex-col justify-center">
+        <p class="text-center text-sm font-medium text-gray-700">
+            {% translate "No posts found" %}
+        </p>
+    </div>
+{% endif %}

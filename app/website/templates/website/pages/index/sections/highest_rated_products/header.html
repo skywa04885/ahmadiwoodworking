@@ -1,0 +1,16 @@
+{% extends "website/components/sections/offset/header.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="flex flex-row items-center justify-between">
+        <a class="text-sm text-black hover:text-gold" href="{% url "posts" %}">
+            {% translate "View more" %}
+        </a>
+        <h2 class="font-bold text-black text-xl">
+            <span class="uppercase font-medium">{% translate "Highest rated" %}</span>
+            <span class="font-bold">{% translate "Ahmadi woodworking products" %}</span>
+        </h2>
+    </div>
+{% endblock %}
+

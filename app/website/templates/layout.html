@@ -1,8 +1,16 @@
+{# Loading of modules #}
 {% load static %}
 {% load i18n %}
 {% load compress %}
+{% load meta %}
+{% load i18n %}
+
+{# Global variables #}
+{% get_current_language as language_code %}
+
+{# The layout #}
 <!DOCTYPE html>
-<html lang="en">
+<html {% meta_namespaces %} {% meta_namespaces_schemaorg %} lang="{{ language_code|escape }}">
 <head>
     {% block header %}
         {# Helper thing for debugging #}
@@ -61,6 +69,8 @@
                 }
             </style>
         {% endcompress %}
+        {# Meta #}
+        {% include "meta/meta.html" %}
     {% endblock %}
 </head>
 <body class="bg-gray-50">

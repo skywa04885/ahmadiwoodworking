@@ -13,7 +13,7 @@ class ContactForm(forms.Form):
 
 class ConsultRequestForm(forms.Form):
     """
-    The form for the consultation request
+    The form for the consultation_form request
     """
 
     name = forms.CharField(min_length=3, max_length=50, required=True)

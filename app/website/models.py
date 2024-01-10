@@ -1,7 +1,8 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django_resized import ResizedImageField
-from taggit.managers import TaggableManager
+from meta.models import ModelMeta
+from django.urls import reverse
 
 
 class ContactMessage(models.Model):
@@ -22,18 +23,51 @@ class ContactMessage(models.Model):
         return self.name
 
 
-class Product(models.Model):
+class Product(ModelMeta, models.Model):
     """
     Model for products
     """
 
     thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='products/thumbnails/',
-                                  force_format='JPEG', quality=75)
+                                  force_format='WEBP', quality=75)
     banner = ResizedImageField(size=[1280, 720], crop=['middle', 'center'], upload_to='products/banners/',
-                               force_format='JPEG', quality=75)
+                               force_format='WEBP', quality=75)
     name = models.CharField(max_length=100)
     description = RichTextUploadingField()
-    tags = TaggableManager()
+
+    # The metadata.
+    _metadata = {
+        'title': 'name',
+        'description': 'description',
+        'keywords': 'get_meta_keywords',
+        'image_width': 600,
+        'image_height': 600,
+        'image': 'get_meta_image_url',
+        'url': 'get_absolute_url',
+        'use_facebook': True,
+        'use_schemaorg': True,
+        'use_twitter': True,
+        'use_og': True,
+    }
+
+    def get_absolute_url(self) -> str:
+        """
+        Returns the absolute URL
+        """
+
+        return reverse('product', kwargs={'product_id': self.id})
+
+    def get_meta_image_url(self) -> str:
+        assert self.thumbnail.url is not None
+
+        return self.thumbnail.url
+
+    def get_meta_keywords(self) -> list[str]:
+        """
+        Returns the keywords
+        """
+
+        return [keyword.keyword for keyword in self.keywords.all()]
 
     def __str__(self):
         """
@@ -41,6 +75,24 @@ class Product(models.Model):
         """
 
         return self.name
+
+
+class ProductKeyword(models.Model):
+    """
+    Model for product keywords
+    """
+
+    keyword = models.CharField(max_length=100)
+    product = models.ForeignKey('Product',
+                                on_delete=models.CASCADE,
+                                related_name='keywords')
+
+    def __str__(self):
+        """
+        Returns the keyword
+        """
+
+        return self.keyword
 
 
 class ProductAdvantage(models.Model):
@@ -79,18 +131,52 @@ class ProductDisadvantage(models.Model):
         return self.disadvantage
 
 
-class Project(models.Model):
+class Project(ModelMeta, models.Model):
     """
     Model for projects
     """
 
     thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='project/thumbnails/',
-                                  force_format='JPEG', quality=75)
+                                  force_format='WEBP', quality=75)
     name = models.CharField(max_length=100)
     construction_date = models.DateField()
     products = models.ManyToManyField('Product', related_name='projects')
     colors = models.ManyToManyField('Color', related_name='colors')
     city = models.CharField(max_length=100)
+
+    # The metadata.
+    _metadata = {
+        'title': 'name',
+        'description': 'description',
+        'keywords': 'get_meta_keywords',
+        'image_width': 600,
+        'image_height': 600,
+        'image': 'get_meta_image_url',
+        'url': 'get_absolute_url',
+        'use_facebook': True,
+        'use_schemaorg': True,
+        'use_twitter': True,
+        'use_og': True,
+    }
+
+    def get_absolute_url(self) -> str:
+        """
+        Returns the absolute URL
+        """
+
+        return reverse('project', kwargs={'project_id': self.id})
+
+    def get_meta_image_url(self) -> str:
+        assert self.thumbnail.url is not None
+
+        return self.thumbnail.url
+
+    def get_meta_keywords(self) -> list[str]:
+        """
+        Returns the keywords
+        """
+
+        return [keyword.keyword for keyword in self.keywords.all()]
 
     def __str__(self):
         """
@@ -100,13 +186,31 @@ class Project(models.Model):
         return self.name
 
 
+class ProjectKeyword(models.Model):
+    """
+    Model for project keywords
+    """
+
+    keyword = models.CharField(max_length=100)
+    project = models.ForeignKey('Project',
+                                on_delete=models.CASCADE,
+                                related_name='keywords')
+
+    def __str__(self):
+        """
+        Returns the keyword
+        """
+
+        return self.keyword
+
+
 class ProjectPicture(models.Model):
     """
     Model for project pictures
     """
 
-    picture = ResizedImageField(size=[750, 500], crop=['middle', 'center'], upload_to='posts/banners/',
-                                force_format='JPEG', quality=75)
+    picture = ResizedImageField(size=[750, 500], crop=['middle', 'center'], upload_to='newest_projects/banners/',
+                                force_format='WEBP', quality=75)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='pictures')
 
 
@@ -126,19 +230,52 @@ class Color(models.Model):
         return self.name
 
 
-class Post(models.Model):
+class Post(ModelMeta, models.Model):
     """
-    Model for posts
+    Model for newest_projects
     """
 
-    thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='posts/thumbnails/',
-                                  force_format='JPEG', quality=75)
-    banner = ResizedImageField(size=[1920, 720], crop=['middle', 'center'], upload_to='posts/banners/',
-                               force_format='JPEG', quality=75)
+    thumbnail = ResizedImageField(size=[600, 600], crop=['middle', 'center'], upload_to='newest_projects/thumbnails/',
+                                  force_format='WEBP', quality=75)
+    banner = ResizedImageField(size=[1920, 720], crop=['middle', 'center'], upload_to='newest_projects/banners/',
+                               force_format='WEBP', quality=75)
     title = models.CharField(max_length=100)
     content = RichTextUploadingField()
     date = models.DateField()
-    tags = TaggableManager()
+
+    # The metadata.
+    _metadata = {
+        'title': 'name',
+        'description': 'description',
+        'keywords': 'get_meta_keywords',
+        'image_width': 600,
+        'image_height': 600,
+        'image': 'get_meta_image_url',
+        'url': 'get_absolute_url',
+        'use_facebook': True,
+        'use_schemaorg': True,
+        'use_twitter': True,
+        'use_og': True,
+    }
+
+    def get_absolute_url(self) -> str:
+        """
+        Returns the absolute URL
+        """
+
+        return reverse('post', kwargs={'post_id': self.id})
+
+    def get_meta_image_url(self) -> str:
+        assert self.thumbnail.url is not None
+
+        return self.thumbnail.url
+
+    def get_meta_keywords(self) -> list[str]:
+        """
+        Returns the keywords
+        """
+
+        return [keyword.keyword for keyword in self.keywords.all()]
 
     def __str__(self):
         """
@@ -146,6 +283,24 @@ class Post(models.Model):
         """
 
         return self.title
+
+
+class PostKeyword(models.Model):
+    """
+    Model for post keywords
+    """
+
+    keyword = models.CharField(max_length=100)
+    post = models.ForeignKey('Post',
+                             on_delete=models.CASCADE,
+                             related_name='keywords')
+
+    def __str__(self):
+        """
+        Returns the keyword
+        """
+
+        return self.keyword
 
 
 class QAndA(models.Model):
@@ -170,7 +325,7 @@ class QAndA(models.Model):
 
 class ConsultationRequest(models.Model):
     """
-    Model for consultation requests
+    Model for consultation_form requests
     """
 
     name = models.CharField(max_length=100)

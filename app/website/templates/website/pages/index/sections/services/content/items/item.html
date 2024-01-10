@@ -1,0 +1,24 @@
+{% block wrapper %}
+    <!-- Tailwind classes: border-transparent bg-white shadow-xl shadow-gray-300 border-gray-200 -->
+    <div x-data="{ hovering: false }" @mouseenter="hovering = true" @mouseleave="hovering = false"
+         class="rounded-lg text-center flex flex-col items-stretch border-transparent text-black fill-black border"
+         :class="{'border-transparent': !hovering, 'bg-white': hovering, 'shadow-xl': hovering, 'shadow-gray-300': hovering, 'border-gray-200': hovering}">
+        <!-- Tailwind classes: bg-slate-50 rounded-lg -->
+        <div class="p-4 flex flex-col items-center gap-1" :class="{'bg-slate-100': !hovering, 'rounded-lg': !hovering}">
+            <div class="flex flex-col items-center text-slate-900">
+                {% block icon %}
+                {% endblock %}
+            </div>
+            <p class="text-md text-slate-900">
+                {% block title %}
+                {% endblock %}
+            </p>
+        </div>
+        <!-- Tailwind classes: invisible -->
+        <p class="font-light text-sm text-gray-700 px-4 pb-4" :class="{ 'invisible': !hovering }">
+            {% block content %}
+            {% endblock %}
+        </p>
+    </div>
+
+{% endblock %}

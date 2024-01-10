@@ -1,0 +1,9 @@
+{# Extends #}
+{% extends "website/components/sections/base/content.html" %}
+
+{# Content block #}
+{% block content %}
+    <div class="grid lg:grid-cols-3 gap-16">
+        {% include "website/pages/index/sections/services/content/items.html" %}
+    </div>
+{% endblock %}

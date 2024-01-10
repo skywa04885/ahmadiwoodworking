@@ -1,0 +1,20 @@
+{% extends 'website/pages/index/sections/services/content/items/item.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% blocktranslate %}
+        Delivery and installation
+    {% endblocktranslate %}
+{% endblock %}
+
+{% block content %}
+    {% blocktranslate %}
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam aspernatur blanditiis dolore doloremque iste perferendis quod sunt suscipit voluptate?
+    {% endblocktranslate %}
+{% endblock %}
+
+{% block icon %}
+    {% include "website/icons/truck_outline.html" with class="w-12 h-12" stroke_width="1" %}
+{% endblock %}

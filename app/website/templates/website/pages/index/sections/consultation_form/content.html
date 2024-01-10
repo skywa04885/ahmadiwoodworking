@@ -1,0 +1,18 @@
+{# Extends #}
+{% extends "website/components/sections/base/content.html" %}
+
+{# Loading of modules #}
+{% load static %}
+{% load i18n %}
+
+{# Content block #}
+{% block content %}
+    {% include "website/components/consultation_form.html" %}
+{% endblock %}
+
+{# Wrapper block #}
+{% block wrapper %}
+    {% with class='bg-white' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock wrapper %}

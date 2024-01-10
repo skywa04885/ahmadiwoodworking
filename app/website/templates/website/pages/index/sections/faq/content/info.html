@@ -1,0 +1,24 @@
+{% load static %}
+{% load i18n %}
+
+<h2 class="text-3xl self-stretch font-bold text-black text-center">
+    {% translate "FAQs" %}
+</h2>
+<p class="text-right text-gray-600 leading-relaxed font-light">
+    {% blocktranslate %}
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur doloremque iste numquam tempora
+        voluptate! Ducimus illo odit optio soluta suscipit ullam voluptas. Blanditiis, dicta eum facilis
+        inventore, iusto laborum maiores natus officiis possimus praesentium quod suscipit temporibus voluptas!
+        Modi, sunt?
+    {% endblocktranslate %}
+</p>
+<p class="text-black font-medium">For more info please contact our experts</p>
+<div class="flex flex-col items-center self-stretch">
+    <a class="flex flex-row font-medium items-center bg-black text-sm px-3 py-2 text-white rounded-lg gap-2 hover:bg-gold transition-colors duration-200"
+       href="">
+        Contact experts
+        <span>
+            {% include "website/icons/phone_call.html" with class="w-6 h-6" %}
+        </span>
+    </a>
+</div>

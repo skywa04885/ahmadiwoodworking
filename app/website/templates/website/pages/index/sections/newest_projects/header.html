@@ -1,0 +1,15 @@
+{% extends "website/components/sections/base/header.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="flex flex-row items-center justify-between">
+        <a class="text-sm text-black hover:text-gold" href="{% url "portfolio" %}">
+            {% translate "View more" %}
+        </a>
+        <h2 class="font-bold text-black text-xl">
+            <span class="uppercase font-medium">{% translate "Newest" %}</span>
+            <span class="font-bold">{% translate "Ahmadi woodworking projects" %}</span>
+        </h2>
+    </div>
+{% endblock %}

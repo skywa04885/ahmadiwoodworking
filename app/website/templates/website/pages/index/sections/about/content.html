@@ -1,0 +1,58 @@
+{# Extends #}
+{% extends "website/components/sections/base/content.html" %}
+
+{# Loading of modules #}
+{% load static %}
+{% load i18n %}
+
+{# Content block #}
+{% block content %}
+    <div class="grid items-stretch lg:grid-cols-2 gap-4">
+        <div class="rounded-2xl bg-center bg-no-repeat bg-cover h-96"
+             style="background-image: url('{% static 'website/index/cabinets.jpg' %}')">
+        </div>
+        <div class="flex flex-col justify-between text-right gap-6">
+            <div class="flex flex-col gap-8">
+                <h2 class="text-2xl text-black font-bold">
+                    {% translate "About Ahmadi Woodworking" %}
+                </h2>
+                <div class="flex flex-col gap-4">
+                    <p class="text-md text-slate-900 leading-relaxed">
+                        {% blocktranslate %}
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam commodi excepturi, illo
+                            impedit in
+                            iste iure optio possimus saepe veniam?
+                        {% endblocktranslate %}
+                    </p>
+                    <p class="text-md text-slate-900 leading-relaxed">
+                        {% blocktranslate %}
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad aperiam aut corporis,
+                            deserunt
+                            dicta
+                            error iure laborum numquam quibusdam quis quos sapiente sunt, suscipit, tempora? Ab aut
+                            consectetur
+                            ducimus error et eum exercitationem in ipsa.
+                        {% endblocktranslate %}
+                    </p>
+                </div>
+            </div>
+            <div class="flex self-stretch flex-row items-stretch justify-start gap-2">
+                <a class="px-3 py-2 bg-black text-white font-medium text-sm rounded-lg flex items-center gap-2" href="">
+                    {% include "website/icons/phone_call.html" with class="w-6 h-6" %}
+                    {% translate "Contact us" %}
+                </a>
+                <a class="px-3 py-2 bg-gold text-white font-medium text-sm rounded-lg flex items-center"
+                   href="{% url "portfolio" %}">
+                    {% translate "Ahmadi Woodworking Portfolio" %}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# Wrapper block #}
+{% block wrapper %}
+    {% with class='bg-white' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock wrapper %}

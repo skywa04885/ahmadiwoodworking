@@ -1,0 +1,14 @@
+{# Extends #}
+{% extends "website/components/sections/base/content.html" %}
+
+{% block content %}
+    {% with products=newest_products %}
+        {% include "website/components/products.html" %}
+    {% endwith %}
+{% endblock %}
+
+{% block wrapper %}
+    {% with class='bg-slate-100' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock wrapper %}
