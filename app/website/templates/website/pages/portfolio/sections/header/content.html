@@ -1,0 +1,16 @@
+{% extends 'components/../website/components/header.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block header %}
+    {% static "website/pages/portfolio/sections/header/background.webp" as background %}
+
+    {% translate "Portfolio" as title %}
+
+    {{ block.super }}
+{% endblock header %}
+
+{% block content %}
+    {% include 'website/pages/portfolio/sections/header/content/breadcrumb.html' %}
+{% endblock %}

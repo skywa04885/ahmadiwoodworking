@@ -1,0 +1,24 @@
+{% extends "website/components/sections/base/content.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="flex flex-col items-center gap-8">
+        {% include "website/icons/envelope_open_outline.html" with stroke_width="1" class="w-24 h-24 text-slate-950" %}
+        <div class="flex flex-col items-center gap-2">
+            <h1 class="text-4xl font-semibold text-slate-950 text-center">
+                {% translate "Thank you for your message!" %}
+            </h1>
+            <p class="text-center font-light text-slate-800">
+                {% translate "We will get back to you as soon as possible." %}
+            </p>
+        </div>
+        <a href="{% url "contact" %}"
+           class="bg-black px-6 py-3 flex flex-row gap-2 text-white fill-white rounded-lg text-sm items-center font-medium transition-colors duration-200 hover:bg-gold">
+            <span>
+                {% include "website/icons/arrow_uturn_left.html" with class="w-6 h-6" %}
+            </span>
+            {% translate "Go back" %}
+        </a>
+    </div>
+{% endblock %}

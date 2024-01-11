@@ -847,7 +847,7 @@ msgid "The number of days must be between {min_days} and {max_days}."
 msgstr ""
 
 #: venv/lib/python3.11/site-packages/django/forms/fields.py:629
-msgid "No file was submitted. Check the encoding type on the form."
+msgid "No file was submitted. Check the encoding type on the map."
 msgstr ""
 
 #: venv/lib/python3.11/site-packages/django/forms/fields.py:630
@@ -901,7 +901,7 @@ msgstr ""
 msgid "Enter a valid JSON."
 msgstr ""
 
-#. Translators: This is the default suffix added to form field labels
+#. Translators: This is the default suffix added to map field labels
 #: venv/lib/python3.11/site-packages/django/forms/forms.py:94
 msgid ":"
 msgstr ""
@@ -920,14 +920,14 @@ msgstr ""
 
 #: venv/lib/python3.11/site-packages/django/forms/formsets.py:65
 #, python-format
-msgid "Please submit at most %(num)d form."
+msgid "Please submit at most %(num)d map."
 msgid_plural "Please submit at most %(num)d forms."
 msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.11/site-packages/django/forms/formsets.py:70
 #, python-format
-msgid "Please submit at least %(num)d form."
+msgid "Please submit at least %(num)d map."
 msgid_plural "Please submit at least %(num)d forms."
 msgstr[0] ""
 msgstr[1] ""

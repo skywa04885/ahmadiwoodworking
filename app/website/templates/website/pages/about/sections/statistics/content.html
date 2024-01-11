@@ -1,0 +1,24 @@
+{% extends "website/components/sections/base/content.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    {% translate "Employees" as employees_title %}
+    {% translate "Projects" as projects_title %}
+    {% translate "Satisfied Customers" as satisfied_customers_title %}
+    {% translate "Products" as products_title %}
+
+    <div class="grid xl:grid-cols-4 md:grid-cols-2">
+        {% include "website/pages/about/sections/statistics/content/statistic.html" with title=employees_title subtitle=1 %}
+        {% include "website/pages/about/sections/statistics/content/statistic.html" with title=projects_title subtitle=n_projects %}
+        {% include "website/pages/about/sections/statistics/content/statistic.html" with title=satisfied_customers_title subtitle=40 %}
+        {% include "website/pages/about/sections/statistics/content/statistic.html" with title=products_title subtitle=n_products %}
+    </div>
+{% endblock %}
+
+{% block wrapper %}
+    {% with class="bg-slate-100 mb-16" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}

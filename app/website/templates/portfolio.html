@@ -1,9 +1,0 @@
-{% extends "layout.html" %}
-{% load static %}
-{% block title %}
-    Portfolio
-{% endblock %}
-{% block content %}
-    {% include 'portfolio/header.html' %}
-    {% include 'portfolio/projects.html' with projects=page.object_list %}
-{% endblock %}

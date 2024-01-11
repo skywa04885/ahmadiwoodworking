@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<form method="GET">
+    <div class="flex items-stretch justify-end gap-2">
+        <button type="submit"
+                class="bg-gold px-4 py-2 text-white rounded-md text-sm font-medium flex flex-row items-center gap-2 transition-color duration-200 hover:bg-slate-950">
+                <span>
+                    {% include "website/icons/magnifying_glass_outline.html" with class="w-6 h-6" %}
+                </span>
+            <span>
+                    {% translate "Search" %}
+                </span>
+        </button>
+        <input name="query" type="text" placeholder="{% translate "Query ..." %}" {% if query %}
+               value="{{ query|escape }}" {% endif %}
+               class="border-2 border-gold bg-transparent rounded-md px-4 text-right placeholder-gray-800 text-gold outline-none"/>
+    </div>
+</form>

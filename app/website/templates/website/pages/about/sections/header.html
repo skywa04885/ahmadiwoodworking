@@ -1,0 +1,14 @@
+{% extends "website/components/header.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block header %}
+    {% static "website/pages/about/sections/header/background.webp" as background %}
+    {% translate "About" as title %}
+    {{ block.super }}
+{% endblock header %}
+
+{% block content %}
+    {% include "website/pages/about/sections/header/breadcrumb.html" %}
+{% endblock %}

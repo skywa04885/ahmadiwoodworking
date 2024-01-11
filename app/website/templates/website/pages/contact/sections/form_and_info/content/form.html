@@ -1,0 +1,55 @@
+<form method="POST">
+    {% csrf_token %}
+    <div class="flex flex-col items-stretch gap-4">
+        <h2 class="text-lg text-black font-bold text-right">Get in touch</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-2">
+                <input class="p-2 self-stretch bg-transparent rounded-md transition-colors duration-200 border text-sm text-right{% if form.name.errors %} placeholder-red-500 border-red-600{% else %} placeholder-slate-500 border-gray-300{% endif %}"
+                       placeholder="First and last name"
+                       name="{{ form.name.html_name }}"
+                        {% if form.name.value %} value="{{ form.name.value }}" {% endif %}/>
+                {% if form.name.errors %}
+                    <div class="flex flex-col gap-1 text-right">
+                        {% for error in form.name.errors %}
+                            <p class="text-xs text-red-600">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="flex flex-col gap-2">
+                <input class="p-2 self-stretch bg-transparent rounded-md transition-colors duration-200 border text-sm text-right{% if form.phone.errors %} placeholder-red-500 border-red-600{% else %} placeholder-slate-500 border-gray-300{% endif %}"
+                       placeholder="Phone bumber"
+                       name="{{ form.phone.html_name }}"
+                        {% if form.phone.value %} value="{{ form.phone.value }}" {% endif %}/>
+                {% if form.phone.errors %}
+                    <div class="flex flex-col gap-1 text-right">
+                        {% for error in form.phone.errors %}
+                            <p class="text-xs text-red-600">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="flex flex-col gap-2">
+            <textarea rows="8"
+                      class="p-2 self-stretch bg-transparent rounded-md transition-colors duration-200 border text-sm text-right{% if form.message.errors %} placeholder-red-500 border-red-600{% else %} placeholder-slate-500 border-gray-300{% endif %}"
+                      placeholder="Message" name="{{ form.message.html_name }}"
+            >{% if form.message.value %}{{ form.message.value }}{% endif %}</textarea>
+            {% if form.message.errors %}
+                <div class="flex flex-col gap-1 text-right">
+                    {% for error in form.message.errors %}
+                        <p class="text-xs text-red-600">{{ error|escape }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="flex flex-col items-start">
+            <button type="submit" class="px-6 py-2 bg-black text-sm text-white rounded-md font-medium transition-colors duration-200 hover:bg-gold flex flex-row items-center gap-2">
+                <span>
+                    {% include "website/icons/paper_airplane_outline.html" with class="w-6 h-6" %}
+                </span>
+                Submit
+            </button>
+        </div>
+    </div>
+</form>

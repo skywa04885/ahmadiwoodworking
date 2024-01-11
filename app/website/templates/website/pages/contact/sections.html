@@ -1,0 +1,8 @@
+{% include "website/pages/contact/sections/header.html" %}
+
+{% if contact_message %}
+    {% include "website/pages/contact/sections/success_message.html" %}
+{% else %}
+    {% include "website/pages/contact/sections/form_and_info.html" %}
+    {% include "website/pages/contact/sections/map.html" %}
+{% endif %}

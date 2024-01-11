@@ -1,0 +1,11 @@
+{% extends "website/components/sections/base/content.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% static "website/pages/about/sections/image/background.webp" as background %}
+
+    <div class="h-72 rounded-xl bg-no-repeat bg-cover bg-center"
+         style="background-image: url('{{ background }}')">
+    </div>
+{% endblock %}

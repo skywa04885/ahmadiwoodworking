@@ -69,23 +69,23 @@ def index(request: HttpRequest) -> HttpResponse:
 
 def contact(request: HttpRequest) -> HttpResponse:
     """
-    This view handles the contact form.
+    This view handles the contact map.
     """
 
-    # Check if the form has been submitted.
+    # Check if the map has been submitted.
     if request.method == "POST":
-        # Create a form instance and populate it with data from the request.
+        # Create a map instance and populate it with data from the request.
         form = ContactForm(request.POST)
 
-        # Get the form data.
-        name, phone, message = (
-            form.data["name"],
-            form.data["phone"],
-            form.data["message"],
-        )
-
-        # Check if the form is valid.
+        # Check if the map is valid.
         if form.is_valid():
+            # Get the map data.
+            name, phone, message = (
+                form.data["name"],
+                form.data["phone"],
+                form.data["message"],
+            )
+
             # Get the email templates.
             txt_template = get_template("website/mail/contact_notification.txt")
             html_template = get_template("website/mail/contact_notification.html")
@@ -117,12 +117,14 @@ def contact(request: HttpRequest) -> HttpResponse:
             )
             contact_message.save()
 
-            return redirect("contact-thanks")
+            return render(request, "website/pages/contact.html", {
+                "contact_message": contact_message,
+            })
     else:
         form = ContactForm()
 
     # Render the contact page.
-    return render(request, "contact.html", {"form": form})
+    return render(request, "website/pages/contact.html", {"form": form})
 
 
 def about(request: HttpRequest) -> HttpResponse:
@@ -130,15 +132,13 @@ def about(request: HttpRequest) -> HttpResponse:
     This view handles the about page.
     """
 
-    return render(request, "about.html")
+    n_products: int = Product.objects.count()
+    n_projects: int = Project.objects.count()
 
-
-def contact_thanks(request: HttpRequest) -> HttpResponse:
-    """
-    This view handles the contact form.
-    """
-
-    return render(request, "contact-thanks.html")
+    return render(request, "website/pages/about.html", {
+        "n_products": n_products,
+        "n_projects": n_projects,
+    })
 
 
 def portfolio(request: HttpRequest) -> HttpResponse:
@@ -162,7 +162,7 @@ def portfolio(request: HttpRequest) -> HttpResponse:
     # Render the portfolio page.
     return render(
         request,
-        "portfolio.html",
+        "website/pages/portfolio.html",
         {
             "page": page,
             "query": query,
@@ -224,7 +224,7 @@ def product(request: HttpRequest, product_id: int) -> HttpResponse:
     # Gets all the projects using this product.
     projects: QuerySet[Project] = product.projects.all()
 
-    # Gets the consultation_form request form.
+    # Gets the consultation_form request map.
     consult_request_form = ConsultRequestForm()
 
     # Renders the product page.
@@ -245,21 +245,21 @@ def product(request: HttpRequest, product_id: int) -> HttpResponse:
 
 def request_consultation(request: HttpRequest) -> HttpResponse:
     """
-    This view handles the consultation_form request form.
+    This view handles the consultation_form request map.
     """
 
-    # Check if the form has been submitted.
+    # Check if the map has been submitted.
     if request.method == "POST":
         # Get the redirection target from the request.
         redirection_target: str = request.POST.get("redirection_target", "index")
 
-        # Create a form instance and populate it with data from the request.
+        # Create a map instance and populate it with data from the request.
         form = ConsultRequestForm(request.POST)
 
-        # Get the form data.
+        # Get the map data.
         name, phone = form.data["name"], form.data["phone"]
 
-        # Check if the form is valid.
+        # Check if the map is valid.
         if form.is_valid():
             # Get the email templates.
             txt_template = get_template("website/mail/consultation_notification.txt")
@@ -321,7 +321,7 @@ def products(request: HttpRequest) -> HttpResponse:
     page: Page = paginator.get_page(page)
 
     # Renders the products page.
-    return render(request, "website/products.html", {"page": page, "query": query})
+    return render(request, "website/pages/products.html", {"page": page, "query": query})
 
 
 def posts(request: HttpRequest) -> HttpResponse:
@@ -351,7 +351,7 @@ def posts(request: HttpRequest) -> HttpResponse:
     page: Page = paginator.get_page(page)
 
     # Renders the products page.
-    return render(request, "website/posts.html", {
+    return render(request, "website/pages/posts.html", {
         "page": page,
         "query": query
     })

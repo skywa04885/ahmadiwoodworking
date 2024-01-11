@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% translate "Products" %}
+{% endblock %}
+
+{% block content %}
+    {% include "website/pages/products/sections.html" %}
+{% endblock %}

@@ -3,7 +3,7 @@ from django import forms
 
 class ContactForm(forms.Form):
     """
-    The form for the contact us page
+    The map for the contact us page
     """
 
     name = forms.CharField(min_length=3, max_length=50, required=True)
@@ -13,7 +13,7 @@ class ContactForm(forms.Form):
 
 class ConsultRequestForm(forms.Form):
     """
-    The form for the consultation_form request
+    The map for the consultation_form request
     """
 
     name = forms.CharField(min_length=3, max_length=50, required=True)
