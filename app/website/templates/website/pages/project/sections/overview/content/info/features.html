@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<div class="flex flex-col gap-4">
+    <p class="bg-black rounded-lg px-4 py-2 text-white font-bold uppercase text-center">
+        {% translate "Features" %}
+    </p>
+    <ul class="flex flex-col items-stretch gap-2">
+        {% include "website/pages/project/sections/overview/content/info/features/city_item.html" %}
+        {% include "website/pages/project/sections/overview/content/info/features/colors_item.html" %}
+        {% include "website/pages/project/sections/overview/content/info/features/year_of_construction_item.html" %}
+    </ul>
+</div>

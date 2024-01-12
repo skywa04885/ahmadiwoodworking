@@ -1,0 +1,9 @@
+{% extends "website/pages/project/sections/overview/content/info/features/item.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    {% blocktranslate with construction_date=project.construction_date|date:"Y" %}
+        Year of construction: {{ construction_date }}
+    {% endblocktranslate %}
+{% endblock %}

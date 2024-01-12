@@ -1,0 +1,13 @@
+{% extends "website/components/sections/base/content.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="flex flex-col gap-16">
+            {% include "website/pages/product/sections/overview/content/comparison.html" %}
+            {% include "website/pages/product/sections/overview/content/contact.html" %}
+        </div>
+        <img class="rounded-xl" src="{{ product.banner.url }}" alt=""/>
+    </div>
+{% endblock %}

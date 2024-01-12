@@ -29,7 +29,7 @@
         value="{{ redirection_target|escape }}"
       />
       <div class="flex flex-col items-center gap-2">
-        <h2 class="text-xl text-white font-bold">{% trans "Consultation request map" %}</h2>
+        <h2 class="text-xl text-white font-bold">{% translate "Consultation request" %}</h2>
         <p class="text-md text-white">
           {% trans "Please fill out the map below if you request free counsellors to contact you in the shortest time." %}
         </p>
@@ -45,13 +45,13 @@
           class="grow bg-white backdrop-blur-xl bg-opacity-10 hover:bg-opacity-20 transition-colors duration-200 px-4 py-3 rounded-xl outline-none border border-white border-opacity-60 hover:border-opacity-80 text-sm font-semibold text-white placeholder-white placeholder-opacity-60 hover:placeholder-opacity-80"
           type="tel"
           name="phone"
-          placeholder="{% trans "Phone number" %}"
+          placeholder="{% translate "Phone number" %}"
         />
         <input
           class="grow bg-white backdrop-blur-xl bg-opacity-10 hover:bg-opacity-20 transition-colors duration-200 px-4 py-3 rounded-xl outline-none border border-white border-opacity-60 hover:border-opacity-80 text-sm font-semibold text-white placeholder-white placeholder-opacity-60 hover:placeholder-opacity-80"
           type="text"
           name="name"
-          placeholder="{% trans "Firstname and lastname" %}"
+          placeholder="{% translate "Firstname and lastname" %}"
         />
         <button
           class="p-4 block backdrop-blur-xl sm:hidden bg-gold text-white uppercase rounded-xl text-xs font-semibold transition-colors duration-200 border-2 border-gold hover:border-white hover:text-white hover:bg-transparent"

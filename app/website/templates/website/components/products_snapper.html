@@ -1,0 +1,21 @@
+{% extends "website/components/snapper.html" %}
+
+{% load i18n %}
+
+{% block wrapper %}
+    {% if products %}
+        {{ block.super }}
+    {% else %}
+        <div class="flex flex-col justify-center">
+            <p class="text-center text-sm font-medium text-gray-700">
+                {% translate "No products found" %}
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% for product in products %}
+        {% include "website/components/products/product.html" %}
+    {% endfor %}
+{% endblock %}

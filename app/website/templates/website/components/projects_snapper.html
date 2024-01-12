@@ -1,0 +1,23 @@
+{% extends "website/components/snapper.html" %}
+
+{% load i18n %}
+
+{% block wrapper %}
+    {% if projects %}
+        {{ block.super }}
+    {% else %}
+        <div class="flex flex-col justify-center">
+            <div class="flex flex-col justify-center">
+                <p class="text-center text-sm font-medium text-gray-700">
+                    {% translate "No projects found" %}
+                </p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% for project in projects %}
+        {% include "website/components/projects/project.html" %}
+    {% endfor %}
+{% endblock %}

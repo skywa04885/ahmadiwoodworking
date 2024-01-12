@@ -7,12 +7,12 @@
                 <span>
                     {% include "website/icons/magnifying_glass_outline.html" with class="w-6 h-6" %}
                 </span>
-            <span>
+                <span class="hidden sm:block">
                     {% translate "Search" %}
                 </span>
         </button>
         <input name="query" type="text" placeholder="{% translate "Query ..." %}" {% if query %}
                value="{{ query|escape }}" {% endif %}
-               class="border-2 border-gold bg-transparent rounded-md px-4 text-right placeholder-gray-800 text-gold outline-none"/>
+               class="border-2 grow sm:grow-0 border-gold bg-transparent rounded-md px-4 text-right placeholder-gray-800 text-gold outline-none"/>
     </div>
 </form>

@@ -20,7 +20,7 @@
     {# Topbar #}
     <!-- Tailwind classes: bg-black bg-opacity-10 text-white bg-white bg-black shadow-lg -->
     <div @scroll.window="transparent = window.scrollY < 20"
-         class="flex items-center justify-center p-2 duration-200 transition-all backdrop-blur-sm fixed top-0 left-0 right-0 z-40 h-32"
+         class="flex items-center justify-center p-2 duration-200 transition-all backdrop-blur-sm fixed top-0 left-0 right-0 z-40 h-24"
          :class="{ 'bg-black bg-opacity-10 text-white': transparent && !expanded, 'bg-white text-black shadow-lg': !transparent || expanded }">
         <div class="container flex flex-row justify-between sm:justify-normal items-center space-x-8">
             {# Contact info #}
@@ -83,7 +83,7 @@
             </div>
             <div class="flex flex-row">
                 <a href="{% url 'index' %}"
-                   class="block w-24 h-24 md:w-28 md:h-28 bg-center bg-cover"
+                   class="block w-20 h-20 md:w-28 md:h-28 bg-center bg-cover"
                    style="background-image: url('{% static 'website/logo256x256.png' %}')">
 
                 </a>
@@ -94,7 +94,7 @@
          :class="{ 'opacity-80': expanded, 'opacity-0 pointer-events-none': !expanded }">
     </div>
     <!-- Tailwind classes: opacity-0 opacity-100 pointer-events-none -->
-    <div class="transition-all duration-200 md:hidden overflow-hidden bg-white shadow-lg fixed left-0 top-32 right-0 z-40"
+    <div class="transition-all duration-200 md:hidden overflow-hidden bg-white shadow-lg fixed left-0 top-24 right-0 z-40"
          :class="{ 'opacity-0 pointer-events-none': !expanded, 'opacity-100': expanded }">
         <ul class="flex flex-col items-stretch text-right">
             {% include "website/components/nav/mobile_item.html" with title=about_title href=about_href %}

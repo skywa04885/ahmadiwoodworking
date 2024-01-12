@@ -1,0 +1,9 @@
+{% extends "website/pages/project/sections/overview/content/info/features/item.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    {% blocktranslate with city=project.city %}
+        City: {{ city }}
+    {% endblocktranslate %}
+{% endblock %}

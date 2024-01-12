@@ -1,0 +1,13 @@
+{{ picture_urls|json_script:"images-data" }}
+
+<div class="flex flex-col gap-4 items-stretch" x-data="{ images: [], selectedImage: 0 }"
+     x-init="images = JSON.parse(document.getElementById('images-data').textContent)">
+    <img class="rounded-xl" :src="images[selectedImage]" />
+    <div class="overflow-x-auto flex flex-row gap-4 scrollbar scrollbar-thumb-black scrollbar-h-2 scrollbar-track-gray-100 scrollbar-thumb-rounded pb-3">
+            <template x-for="(image, index) in images">
+                <img class="w-36 opacity-100 transition-opacity duration-200 rounded-xl cursor-pointer" :class="{
+                    'opacity-50': index !== selectedImage
+                }" :src="image" alt="" @click="selectedImage = index">
+            </template>
+    </div>
+</div>

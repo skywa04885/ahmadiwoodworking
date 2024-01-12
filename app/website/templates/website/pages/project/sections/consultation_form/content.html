@@ -1,0 +1,6 @@
+{% extends "website/components/sections/base/content.html" %}
+
+{% block content %}
+    {% url "project" project.id as redirection_target %}
+    {% include "website/components/consultation_form.html" %}
+{% endblock %}

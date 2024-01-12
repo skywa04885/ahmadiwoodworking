@@ -1,0 +1,15 @@
+{% extends "website/components/header.html" %}
+
+{% load static %}
+
+{% block header %}
+    {% static "website/pages/project/sections/header/background.webp" as background %}
+
+    {% with title=project.name class="bg-slate-100" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock header %}
+
+{% block content %}
+    {% include "website/pages/project/sections/header/breadcrumb.html" %}
+{% endblock %}

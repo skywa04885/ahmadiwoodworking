@@ -1,0 +1,50 @@
+{% load i18n %}
+{# Lists the advantages and disadvantages of the product #}
+<div class="flex flex-col gap-2">
+    <div class="grid grid-cols-2 bg-black rounded-md p-2">
+        <p class="text-white text-sm text-center font-semibold">
+            {% translate 'Advantages' %}
+        </p>
+        <p class="text-white text-sm text-center font-semibold">
+            {% translate 'Disadvantages' %}
+        </p>
+    </div>
+    <div>
+        <div class="flex flex-row gap-2">
+            {# Advantages #}
+            <div class="flex-1">
+                <div class="p-2 bg-white rounded-md shadow-md shadow-gray-100 border border-gray-200">
+                    <ul class="flex flex-col gap-1">
+                        {% for advantage in advantages %}
+                            <li class="flex flex-row items-center justify-end gap-1 text-slate-600">
+                                <span class="text-sm font-medium">
+                                    {{ advantage.advantage }}
+                                </span>
+                                <span>
+                                    {% include "website/icons/check_outline.html" with class="w-6 h-6" %}
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {# Disadvantages #}
+            <div class="flex-1">
+                <div class="p-2 bg-white rounded-md shadow-md shadow-gray-100 border border-gray-200">
+                    <ul class="flex flex-col gap-1">
+                        {% for disadvantage in disadvantages %}
+                            <li class="flex flex-row items-center justify-end gap-1 text-slate-600">
+                                <span class="text-sm font-medium">
+                                    {{ disadvantage.disadvantage }}
+                                </span>
+                                <span>
+                                    {% include "website/icons/check_outline.html" with class="w-6 h-6" %}
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<div class="flex flex-col items-end gap-4">
+    <p class="text-black font-bold text-sm">
+        {% translate "Contact our expert for more information" %}
+    </p>
+    <div class="flex flex-row items-stretch gap-4">
+        <a class="px-4 py-2 text-sm rounded-md bg-black flex flex-row gap-2 items-center font-medium text-white hover:bg-slate-200 hover:text-slate-950 transition-colors duration-200"
+           href="{% url 'contact' %}">
+            <span>
+                {% translate "Contact us" %}
+            </span>
+            <span>
+                {% include "website/icons/phone_outline.html" with class="w-6 h-6" %}
+            </span>
+        </a>
+        <a class="px-4 font-medium py-2 text-sm rounded-md bg-gold flex flex-row gap-2 items-center text-white hover:bg-slate-200 hover:text-slate-950 transition-colors duration-200"
+           href="tel:+989122962718">
+            {% translate "Free advice" %}
+        </a>
+    </div>
+</div>

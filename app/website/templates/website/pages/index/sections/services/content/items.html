@@ -1,3 +1,13 @@
-{% include "website/pages/index/sections/services/content/items/delivery_and_installation.html" %}
-{% include "website/pages/index/sections/services/content/items/design_and_production.html" %}
-{% include "website/pages/index/sections/services/content/items/repair.html" %}
+{% extends "website/components/snapper.html" %}
+
+{% block content %}
+    {% include "website/pages/index/sections/services/content/items/delivery_and_installation.html" %}
+    {% include "website/pages/index/sections/services/content/items/design_and_production.html" %}
+    {% include "website/pages/index/sections/services/content/items/repair.html" %}
+{% endblock %}
+
+{% block wrapper %}
+    {% with content_class="px-4 pb-8" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}

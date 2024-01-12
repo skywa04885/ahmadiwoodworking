@@ -1,0 +1,38 @@
+{% block wrapper %}
+    <div x-data="{ offsetLeft: 0, clientWidth: 0, scrollWidth: 0 }" class="relative">
+        <div x-ref="scrollbox" @scroll="offsetLeft = $event.target.scrollLeft"
+             x-init="() => {
+                clientWidth = $el.clientWidth;
+                scrollWidth = $el.scrollWidth;
+
+                const resizeListener = () => {
+                    clientWidth = $el.clientWidth;
+                    scrollWidth =  $el.scrollWidth;
+                };
+                window.addEventListener('resize', resizeListener);
+
+                return () => {
+                    window.removeEventListener('resize', resizeListener);
+                };
+            }"
+             class="flex md:grid md:grid-cols-3 gap-6 snap-x md:snap-none snap-mandatory md:snap-proximity
+              w-full md:w-auto overflow-x-scroll md:overflow-x-auto scrollbar scrollbar-h-0 scroll-smooth{% if content_class %} {{ content_class|escape }}{% endif %}">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/4 md:hidden">
+            <button type="button" class="bg-gold p-2 text-black rounded-full shadow-lg transition-colors duration-200"
+                    @click="$refs.scrollbox.scrollTo({ left: Math.max(0, offsetLeft - clientWidth) })"
+                    :class="{ 'opacity-50': offsetLeft <= 0, 'opacity-100 hover:bg-black hover:text-white': offsetLeft > 0 }">
+                {% include "website/icons/arrow_left_circle_outline.html" with class="w-8 h-8" %}
+            </button>
+        </div>
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 md:hidden">
+            <button type="button" class="bg-gold p-2 text-black rounded-full shadow-lg transition-colors duration-200"
+                    :class="{ 'opacity-50': offsetLeft >= scrollWidth - clientWidth, 'opacity-100 hover:bg-black hover:text-white': offsetLeft < scrollWidth - clientWidth }"
+                    @click="$refs.scrollbox.scrollTo({ left: Math.min(scrollWidth, offsetLeft + clientWidth) })">
+                {% include "website/icons/arrow_right_circle_outline.html" with class="w-8 h-8" %}
+            </button>
+        </div>
+    </div>
+{% endblock %}

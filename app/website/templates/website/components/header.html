@@ -1,5 +1,5 @@
 {% block header %}
-<header class="">
+<header {% if class %} class="{{ class|escape }}" {% endif %}>
     {# Background image #}
     <div class="relative h-[50vh]">
         <div class="absolute bg-cover bg-fixed bg-center bg-no-repeat left-0 right-0 top-0 bottom-0"

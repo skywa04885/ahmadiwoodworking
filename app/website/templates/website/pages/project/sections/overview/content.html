@@ -1,0 +1,14 @@
+{% extends "website/components/sections/base/content.html" %}
+
+{% block content %}
+    <div class="flex flex-col lg:flex-row gap-8">
+        {% include "website/pages/project/sections/overview/content/info.html" %}
+        {% include "website/pages/project/sections/overview/content/carousel.html" %}
+    </div>
+{% endblock %}
+
+{% block wrapper %}
+    {% with class="bg-slate-100" %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}

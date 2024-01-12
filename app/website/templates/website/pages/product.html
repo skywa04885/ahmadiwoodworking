@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    {% include "website/pages/product/sections.html" %}
+{% endblock %}

@@ -195,7 +195,7 @@ def project(request: HttpRequest, project_id: int) -> HttpResponse:
     # Render the project page.
     return render(
         request,
-        "project.html",
+        "website/pages/project.html",
         {
             "project": project,
             "products": products,
@@ -230,12 +230,12 @@ def product(request: HttpRequest, product_id: int) -> HttpResponse:
     # Renders the product page.
     return render(
         request,
-        "product.html",
+        "website/pages/product.html",
         {
             "product": product,
             "advantages": advantages,
             "disadvantages": disadvantages,
-            "newest_projects": posts,
+            "posts": posts,
             "projects": projects,
             "consult_request_form": consult_request_form,
             "meta": meta

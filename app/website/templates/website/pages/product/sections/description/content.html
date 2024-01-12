@@ -1,0 +1,15 @@
+{% extends "website/components/sections/base/content.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    {% autoescape off %}
+        {{ product.description }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block wrapper %}
+    {% with class='bg-white' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}

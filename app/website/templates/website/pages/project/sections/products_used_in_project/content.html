@@ -1,0 +1,8 @@
+{# Extends #}
+{% extends "website/components/sections/base/content.html" %}
+
+{% block content %}
+    {% with products=products %}
+        {% include "website/components/products_snapper.html" %}
+    {% endwith %}
+{% endblock %}

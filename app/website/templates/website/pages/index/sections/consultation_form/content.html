@@ -7,6 +7,8 @@
 
 {# Content block #}
 {% block content %}
+    {% url "index" as redirection_target %}
+
     {% include "website/components/consultation_form.html" %}
 {% endblock %}
 
