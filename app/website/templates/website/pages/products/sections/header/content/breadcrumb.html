@@ -1,11 +1,10 @@
-{% extends 'components/breadcrumb.html' %}
+{% extends "website/components/breadcrumb.html" %}
 {% load i18n %}
 {% block items %}
-    {% url 'index' as index_url %}
     {% url 'products' as products_url %}
     
     {% trans "Products" as products_name %}
 
-    {% include 'components/breadcrumb/item.html' with name='Ahmadi Woodworking' url=index_url %}
-    {% include 'components/breadcrumb/item.html' with name=products_name url=products_url %}
+    {% include "website/components/breadcrumb/home_item.html" %}
+    {% include "website/components/breadcrumb/item.html" with name=products_name url=products_url %}
 {% endblock %}

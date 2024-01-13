@@ -1,11 +1,14 @@
-{% extends "layout.html" %}
+{% extends "website/components/layout.html" %}
 
 {% load static %}
-
-{% block title %}
-    Portfolio
-{% endblock %}
+{% load i18n %}
 
 {% block content %}
     {% include "website/pages/portfolio/sections.html" %}
+{% endblock %}
+
+{% block wrapper %}
+    {% translate "Portfolio" as title %}
+
+    {{ block.super }}
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends "website/components/layout.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    {% include "website/pages/index/sections.html" %}
+{% endblock %}
+
+{% block wrapper %}
+    {% translate "Home" as title %}
+
+    {{ block.super }}
+{% endblock %}

@@ -1,13 +1,14 @@
 {% extends "website/components/header.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block header %}
     {% static "website/pages/contact/sections/header/background.webp" as background %}
 
-    {% with title="Hello World" %}
-        {{ block.super }}
-    {% endwith %}
+    {% translate "Contact" as title %}
+
+    {{ block.super }}
 {% endblock header %}
 
 {% block content %}

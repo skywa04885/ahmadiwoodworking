@@ -1,11 +1,7 @@
-{% extends "layout.html" %}
+{% extends "website/components/layout.html" %}
 
 {% load i18n %}
 {% load static %}
-
-{% block title %}
-    Portfolio
-{% endblock %}
 
 {% block header %}
     {{ block.super }}
@@ -13,4 +9,10 @@
 
 {% block content %}
     {% include "website/pages/product/sections.html" %}
+{% endblock %}
+
+{% block wrapper %}
+    {% with title=product.name %}
+        {{ block.super }}
+    {% endwith %}
 {% endblock %}

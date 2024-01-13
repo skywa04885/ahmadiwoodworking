@@ -1,11 +1,14 @@
-{% extends "layout.html" %}
+{% extends "website/components/layout.html" %}
 
 {% load static %}
-
-{% block title %}
-    Contact
-{% endblock %}
+{% load i18n %}
 
 {% block content %}
     {% include "website/pages/about/sections.html" %}
+{% endblock %}
+
+{% block wrapper %}
+    {% translate "About" as title %}
+
+    {{ block.super }}
 {% endblock %}

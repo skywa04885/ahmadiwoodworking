@@ -21,7 +21,7 @@
     <!-- Tailwind classes: bg-black bg-opacity-10 text-white bg-white bg-black shadow-lg -->
     <div @scroll.window="transparent = window.scrollY < 20"
          class="flex items-center justify-center p-2 duration-200 transition-all backdrop-blur-sm fixed top-0 left-0 right-0 z-40 h-24"
-         :class="{ 'bg-black bg-opacity-10 text-white': transparent && !expanded, 'bg-white text-black shadow-lg': !transparent || expanded }">
+         :class="{ 'bg-black bg-opacity-10 text-white': transparent, 'bg-white text-black shadow-lg': !transparent }">
         <div class="container flex flex-row justify-between sm:justify-normal items-center space-x-8">
             {# Contact info #}
             <div class="items-center flex-row space-x-4 hidden sm:flex">
@@ -31,7 +31,11 @@
                     {% include "website/icons/phone_outline.html" with class="w-8 h-8" %}
                 </span>
                 <p class="text-sm font-medium">
-                    <span class="text-amber-400">0912</span> - 8728242<br/>
+                    <a href="tel:{{ settings.contact_phone_number|escape }}"
+                       class="hover:text-gold hover:underline">
+                        {{ settings.contact_phone_number_formatted|escape }}
+                    </a>
+                    <br/>
                     {% translate 'Call now' %}
                 </p>
                 <a href="tel:+310640435602"
@@ -64,15 +68,15 @@
             </div>
             {# Mobile navigation expander #}
             <div>
-                <!-- Tailwind classes: border-white fill-white border-black fill-black hover:bg-white hover:bg-black -->
+                <!-- Tailwind classes: border-white text-white border-black text-black hover:bg-white hover:bg-black -->
                 <button @click="expanded = !expanded"
                         type="button"
                         class="relative w-12 h-12 border-2 rounded-md block md:hidden transition-colors duration-200 hover:bg-opacity-10"
-                        :class="{ 'border-white fill-white hover:bg-white': transparent && !expanded, 'border-black fill-black hover:bg-black': !transparent || expanded }">
+                        :class="{ 'border-white text-white hover:bg-white': transparent, 'border-black text-black hover:bg-black': !transparent }">
                     <!-- Tailwind classes: opacity-0 rotate-[360deg] -->
                     <span class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center duration-200 transition-transform"
                           :class="{ 'opacity-0': expanded, 'rotate-[360deg]': expanded }">
-                        {% include 'website/icons/menu.html' with class="w-8 h-8" %}
+                        {% include 'website/icons/bars_3_outline.html' with class="w-8 h-8" %}
                     </span>
                     <!-- Tailwind classes: opacity-0 rotate-[360deg] -->
                     <span class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center duration-200 transition-transform"
@@ -83,19 +87,19 @@
             </div>
             <div class="flex flex-row">
                 <a href="{% url 'index' %}"
-                   class="block w-20 h-20 md:w-28 md:h-28 bg-center bg-cover"
-                   style="background-image: url('{% static 'website/logo256x256.png' %}')">
+                   class="block w-20 h-20 bg-center bg-cover"
+                   style="background-image: url('{% static 'website/logo256x256.webp' %}')">
 
                 </a>
             </div>
         </div>
     </div>
-    <div class="fixed inset-0 bg-black z-30 transition-opacity duration-200"
+    <div class="fixed inset-0 bg-black z-30 transition-opacity duration-500"
          :class="{ 'opacity-80': expanded, 'opacity-0 pointer-events-none': !expanded }">
     </div>
     <!-- Tailwind classes: opacity-0 opacity-100 pointer-events-none -->
-    <div class="transition-all duration-200 md:hidden overflow-hidden bg-white shadow-lg fixed left-0 top-24 right-0 z-40"
-         :class="{ 'opacity-0 pointer-events-none': !expanded, 'opacity-100': expanded }">
+    <div class="transition-all duration-500 md:hidden bg-white shadow-lg overflow-hidden fixed left-0 top-24 right-0 z-40"
+         :class="{ 'pointer-events-none max-h-0': !expanded, 'max-h-screen': expanded }">
         <ul class="flex flex-col items-stretch text-right">
             {% include "website/components/nav/mobile_item.html" with title=about_title href=about_href %}
             {% include "website/components/nav/mobile_item.html" with title=contact_title href=contact_href %}

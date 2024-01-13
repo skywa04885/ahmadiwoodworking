@@ -1,19 +1,14 @@
-{# Extend #}
-{% extends "layout.html" %}
+{% extends "website/components/layout.html" %}
 
-{# Loading of modules #}
 {% load i18n %}
 {% load static %}
 
-{# Title block #}
-{% block title %}
-    {% translate "Posts" %}
+{% block content %}
+    {% include "website/pages/post/sections.html" %}
 {% endblock %}
 
-{# content block #}
-{% block content %}
-    {% with products=page.object_list %}
-        {% include "website/pages/post/header.html" %}
-        {% include "website/pages/post/sections/other_posts.html" %}
+{% block wrapper %}
+    {% with title=post.title %}
+        {{ block.super }}
     {% endwith %}
 {% endblock %}

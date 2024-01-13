@@ -1,4 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24" {% if class %} class="{{ class }}" {% endif %}><path d="M0 0h24v24H0z" fill="none"></path>
-    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+     fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        {% if stroke_width %} stroke-width="{{ stroke_width }}" {% else %} stroke-width="1.5" {% endif %}
+        {% if class %} class="{{ class }}" {% endif %}>
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
 </svg>

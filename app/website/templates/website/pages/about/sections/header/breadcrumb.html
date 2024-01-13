@@ -1,7 +1,7 @@
-{% extends 'components/breadcrumb.html' %}
+{% extends "website/components/breadcrumb.html" %}
 {% block items %}
-    {% url 'index' as index_url %}
     {% url 'about' as about_url %}
-    {% include 'components/breadcrumb/item.html' with name='Ahmadi Woodworking' url=index_url %}
-    {% include 'components/breadcrumb/item.html' with name='About' url=about_url %}
+
+    {% include "website/components/breadcrumb/home_item.html" %}
+    {% include "website/components/breadcrumb/item.html" with name='About' url=about_url %}
 {% endblock %}

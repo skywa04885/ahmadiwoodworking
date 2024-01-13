@@ -1,0 +1,7 @@
+{% extends "website/components/sections/base/content.html" %}
+
+{% block content %}
+    {% autoescape off %}
+        {{ post.content }}
+    {% endautoescape %}
+{% endblock %}

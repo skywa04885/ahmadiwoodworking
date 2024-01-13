@@ -1,7 +1,11 @@
+{% load i18n %}
+
 <form method="POST">
     {% csrf_token %}
     <div class="flex flex-col items-stretch gap-4">
-        <h2 class="text-lg text-black font-bold text-right">Get in touch</h2>
+        <h2 class="text-lg text-black font-bold text-right">
+            {% translate "Get in touch" %}
+        </h2>
         <div class="grid md:grid-cols-2 gap-4">
             <div class="flex flex-col gap-2">
                 <input class="p-2 self-stretch bg-transparent rounded-md transition-colors duration-200 border text-sm text-right{% if form.name.errors %} placeholder-red-500 border-red-600{% else %} placeholder-slate-500 border-gray-300{% endif %}"
@@ -48,7 +52,9 @@
                 <span>
                     {% include "website/icons/paper_airplane_outline.html" with class="w-6 h-6" %}
                 </span>
-                Submit
+                <span>
+                    {% translate "Submit" %}
+                </span>
             </button>
         </div>
     </div>

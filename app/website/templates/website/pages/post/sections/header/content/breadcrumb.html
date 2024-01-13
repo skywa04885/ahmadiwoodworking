@@ -1,0 +1,12 @@
+{% extends "website/components/breadcrumb.html" %}
+{% load i18n %}
+{% block items %}
+    {% url "posts" as posts_url %}
+    {% url "post" post.id as post_url %}
+    
+    {% translate "Posts" as posts_name %}
+
+    {% include "website/components/breadcrumb/home_item.html" %}
+    {% include "website/components/breadcrumb/item.html" with name=posts_name url=posts_url %}
+    {% include "website/components/breadcrumb/item.html" with name=post.title url=post_url %}
+{% endblock %}

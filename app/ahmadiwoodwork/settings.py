@@ -196,9 +196,12 @@ STATICFILES_FINDERS = (  ##django compressor
 )
 
 # The URLs for the social media.
-SOCIALS_BALE_URL = ''
-SOCIALS_WHATSAPP_URL = ''
+SOCIALS_BALE_URL = 'https://web.bale.ai/chat?uid=166722572'
+SOCIALS_WHATSAPP_URL = 'https://wa.me/+989122962718'
+SOCIALS_INSTAGRAM_URL = 'https://www.instagram.com/interior_mdf_design/'
 
 # The contact information.
-PHONE_NUMBER = "+989122962718"
-EMAIL = ""
+CONTACT_PHONE_NUMBER_FORMATTED = "+98 91 2296 2718"
+CONTACT_PHONE_NUMBER = "".join(CONTACT_PHONE_NUMBER_FORMATTED.split(" "))
+CONTACT_EMAIL = "rasoul@ahmadiwoodwork.com"
+

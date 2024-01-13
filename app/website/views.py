@@ -42,6 +42,17 @@ def footer_context() -> Dict[str, Any]:
     }
 
 
+def settings_context() -> Dict[str, Any]:
+    return {
+        'contact_email': settings.CONTACT_EMAIL,
+        'contact_phone_number': settings.CONTACT_PHONE_NUMBER,
+        'contact_phone_number_formatted': settings.CONTACT_PHONE_NUMBER_FORMATTED,
+        'socials_bale_url': settings.SOCIALS_BALE_URL,
+        'socials_whatsapp_url': settings.SOCIALS_WHATSAPP_URL,
+        'socials_instagram_url': settings.SOCIALS_INSTAGRAM_URL,
+    }
+
+
 def index(request: HttpRequest) -> HttpResponse:
     """
     This view handles the index page.
@@ -56,13 +67,15 @@ def index(request: HttpRequest) -> HttpResponse:
     # Render the index page.
     return render(
         request,
-        "index.html",
+        "website/pages/index.html",
         {
             "q_and_as": q_and_as,
             "newest_posts": newest_posts,
             "newest_products": newest_products,
             "highest_rated_products": highest_rated_products,
             "newest_projects": newest_projects,
+            "footer": footer_context(),
+            "settings": settings_context(),
         },
     )
 
@@ -124,7 +137,11 @@ def contact(request: HttpRequest) -> HttpResponse:
         form = ContactForm()
 
     # Render the contact page.
-    return render(request, "website/pages/contact.html", {"form": form})
+    return render(request, "website/pages/contact.html", {
+        "form": form,
+        "footer": footer_context(),
+        "settings": settings_context(),
+    })
 
 
 def about(request: HttpRequest) -> HttpResponse:
@@ -138,6 +155,8 @@ def about(request: HttpRequest) -> HttpResponse:
     return render(request, "website/pages/about.html", {
         "n_products": n_products,
         "n_projects": n_projects,
+        "footer": footer_context(),
+        "settings": settings_context(),
     })
 
 
@@ -166,6 +185,8 @@ def portfolio(request: HttpRequest) -> HttpResponse:
         {
             "page": page,
             "query": query,
+            "footer": footer_context(),
+            "settings": settings_context(),
         },
     )
 
@@ -204,6 +225,8 @@ def project(request: HttpRequest, project_id: int) -> HttpResponse:
             "picture_urls": picture_urls,
             "consult_request_form": consult_request_form,
             "meta": meta,
+            "footer": footer_context(),
+            "settings": settings_context(),
         },
     )
 
@@ -238,7 +261,9 @@ def product(request: HttpRequest, product_id: int) -> HttpResponse:
             "posts": posts,
             "projects": projects,
             "consult_request_form": consult_request_form,
-            "meta": meta
+            "meta": meta,
+            "footer": footer_context(),
+            "settings": settings_context(),
         },
     )
 
@@ -321,7 +346,12 @@ def products(request: HttpRequest) -> HttpResponse:
     page: Page = paginator.get_page(page)
 
     # Renders the products page.
-    return render(request, "website/pages/products.html", {"page": page, "query": query})
+    return render(request, "website/pages/products.html", {
+        "page": page,
+        "query": query,
+        "footer": footer_context(),
+        "settings": settings_context(),
+    })
 
 
 def posts(request: HttpRequest) -> HttpResponse:
@@ -353,7 +383,9 @@ def posts(request: HttpRequest) -> HttpResponse:
     # Renders the products page.
     return render(request, "website/pages/posts.html", {
         "page": page,
-        "query": query
+        "query": query,
+        "footer": footer_context(),
+        "settings": settings_context(),
     })
 
 
@@ -384,4 +416,6 @@ def post(request: HttpRequest, post_id: int) -> HttpResponse:
         "post": post,
         "other_posts": other_posts,
         "meta": meta,
+        "footer": footer_context(),
+        "settings": settings_context(),
     })

@@ -1,0 +1,116 @@
+{# Loading of modules #}
+{% load static %}
+{% load i18n %}
+{% load compress %}
+{% load meta %}
+{% load i18n %}
+
+{# Global variables #}
+{% get_current_language as language_code %}
+
+{# The layout #}
+{% block wrapper %}
+    <!DOCTYPE html>
+    <html {% meta_namespaces %} {% meta_namespaces_schemaorg %} lang="{{ language_code|escape }}">
+    <head>
+        {% block header %}
+            {# Helper thing for debugging #}
+            <!-- Page generated at {% now "Y-m-d G:i:s" %} -->
+            {# Title #}
+            <title>
+                {{ title|escape }} - {% translate 'Ahmadi Woodworking' %}
+            </title>
+            {# Links #}
+            <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/apple-touch-icon.png' %}"/>
+            <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/favicon-32x32.png' %}"/>
+            <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/favicon-16x16.png' %}"/>
+            <link rel="manifest" href="{% static 'website/site.webmanifest' %}"/>
+            <link rel="mask-icon" href="{% static 'website/safari-pinned-tab.svg' %}" color="#5bbad5"/>
+            <link rel="shortcut icon" href="{% static 'website/favicon.ico' %}"/>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+                  rel="stylesheet"/>
+            {# Google Analytics #}
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-G1NCZMNQF8"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+
+                gtag('js', new Date());
+
+                gtag('config', 'G-G1NCZMNQF8');
+            </script>
+            {# Meta #}
+            <meta charset="UTF-8"/>
+            <meta name="msapplication-TileColor" content="#da532c"/>
+            <meta name="msapplication-config" content="{% static 'website/browserconfig.xml' %}"/>
+            <meta name="theme-color" content="#ffffff"/>
+            <meta name="viewport"
+                  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+            <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+            {# Scripts #}
+            {% compress js %}
+                <script src="{% static 'website/scripts/alpine.min.js' %}" defer></script>
+            {% endcompress %}
+            {# Stylesheets #}
+            {% compress css %}
+                <link rel="stylesheet" href="{% static 'website/lib/photoswipe/photoswipe.css' %}"/>
+                <link rel="stylesheet" href="{% static 'website/src/output.css' %}"/>
+                <link rel="stylesheet" href="{% static 'website/styles/luke.css' %}"/>
+            {% endcompress %}
+            {# Meta #}
+            {% include "meta/meta.html" %}
+        {% endblock %}
+    </head>
+    <body class="bg-gray-50" x-data="{ 'started': false }" x-init="$nextTick(() => started = true)" :class="{ 'no-transition': !started }">
+    {# The content #}
+    <div class="flex flex-col items-stretch">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {# The contact icon thingy #}
+    <div x-data="{ expanded: false }">
+        <div class="fixed bottom-8 right-8 flex flex-col gap-2 z-40">
+            <!-- Tailwind classes: opacity-0 translate-y-32 pointer-events-none cursor-auto -->
+            <a href="{{ settings.socials_bale_url|escape }}" target="_blank"
+               class="bg-teal-600 rounded-full shadow-md w-14 h-14 text-white cursor-pointer duration-200 transition-all flex items-center justify-center hover:bg-black"
+               :class="{ 'opacity-0': !expanded, 'translate-y-32': !expanded, 'pointer-events-none': !expanded, 'cursor-auto': !expanded }">
+                {% include "website/icons/bale.html" with class="w-6 h-6" %}
+            </a>
+            <!-- Tailwind classes: opacity-0 translate-y-14 pointer-events-none cursor-auto -->
+            <a href="tel:{{ settings.contact_phone_number|escape }}"
+               class="bg-cyan-800 rounded-full shadow-md w-14 h-14 text-white cursor-pointer duration-200 transition-all flex items-center justify-center hover:bg-black"
+               :class="{ 'opacity-0': !expanded, 'translate-y-28': !expanded, 'pointer-events-none': !expanded, 'cursor-auto': !expanded }">
+                {% include "website/icons/phone_outline.html" with class="w-6 h-6" %}
+            </a>
+            <!-- Tailwind classes: opacity-0 translate-y-14 pointer-events-none cursor-auto -->
+            <a href="{{ settings.socials_whatsapp_url|escape }}" target="_blank"
+               class="bg-emerald-800 rounded-full shadow-md z-40 w-14 h-14 text-white cursor-pointer duration-200 transition-all flex items-center justify-center hover:bg-black"
+               :class="{ 'opacity-0': !expanded, 'translate-y-12': !expanded, 'pointer-events-none': !expanded, 'cursor-auto': !expanded }">
+                {% include "website/icons/whatsapp.html" with class="w-6 h-6" %}
+            </a>
+            <button type="button"
+                    class="relative bg-gold p-2 rounded-full z-10 shadow-md w-14 h-14 text-white cursor-pointer duration-200 transition-colors hover:bg-black"
+                    @click="expanded = !expanded">
+                <!-- Tailwind classes: opacity-0 rotate-[360deg] -->
+                <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 duration-200 transition-all"
+                      :class="{ 'opacity-0': expanded, 'rotate-[360deg]': expanded }">
+                {% include "website/icons/chat_bubble_left_right_outline.html" with class="h-8 w-8" %}
+            </span>
+                <!-- Tailwind classes: opacity-0 rotate-[360deg] -->
+                <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 duration-200 transition-all"
+                      :class="{ 'opacity-0': !expanded, 'rotate-[360deg]': expanded }">
+                {% include "website/icons/close.html"  with class="h-8 w-8" %}
+            </span>
+            </button>
+        </div>
+    </div>
+    {% include 'website/components/footer.html' %}
+    {% include 'website/components/nav.html' %}
+    </body>
+    </html>
+{% endblock %}

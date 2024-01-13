@@ -1,0 +1,14 @@
+{% extends "website/components/header.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+    {% include "website/pages/post/sections/header/content/breadcrumb.html" %}
+{% endblock %}
+
+{% block header %}
+    {% with background=post.banner.url title=post.title %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
