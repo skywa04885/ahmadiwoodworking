@@ -34,6 +34,8 @@ class Product(ModelMeta, models.Model):
                                force_format='WEBP', quality=75)
     name = models.CharField(max_length=100)
     description = RichTextUploadingField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # The metadata.
     _metadata = {
@@ -143,6 +145,8 @@ class Project(ModelMeta, models.Model):
     products = models.ManyToManyField('Product', related_name='projects')
     colors = models.ManyToManyField('Color', related_name='colors')
     city = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # The metadata.
     _metadata = {
@@ -242,6 +246,8 @@ class Post(ModelMeta, models.Model):
     title = models.CharField(max_length=100)
     content = RichTextUploadingField()
     date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # The metadata.
     _metadata = {

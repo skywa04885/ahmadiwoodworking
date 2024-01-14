@@ -100,6 +100,8 @@ INSTALLED_APPS = [
     'compressor',
     'cssmin',
     'jsmin',
+    'django.contrib.sitemaps',
+    'django.contrib.sites',
     'ckeditor_uploader',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -108,6 +110,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',

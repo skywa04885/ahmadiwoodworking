@@ -38,12 +38,16 @@
                 </p>
                 <div class="flex flex-col items-stretch gap-3">
                     <p class="text-black font-medium">Eslahmshahr - Tehran</p>
-                    <p class="text-slate-400 font-medium">Phone number</p>
+                    <p class="text-slate-400 font-medium">
+                        {% translate "Phone number" %}
+                    </p>
                     <a class="text-slate-950 font-medium text-sm hover:text-gold hover:underline"
                        href="tel:{{ settings.contact_phone_number|escape }}">
                         {{ settings.contact_phone_number|escape }}
                     </a>
-                    <p class="text-slate-400 font-medium">Email</p>
+                    <p class="text-slate-400 font-medium">
+                        {% translate "Email" %}
+                    </p>
                     <a class="text-slate-950 font-medium text-sm hover:text-gold hover:underline"
                        href="mailto:{{ settings.contact_email|escape }}">
                         {{ settings.contact_email|escape }}
